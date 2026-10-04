@@ -74,7 +74,7 @@ window.WEDDING = {
         viewMap: "View on map", mapTitle: "Map to ", dress: "Dress code",
         openPhoto: "Open photo: ", noPhotos: "Photos are still loading",
         songsHint: "Tap any song to play it",
-        openMap: "Open in Maps", dep: "Departs", arr: "Arrives", musicLoading: "Loading music… tap ♪ if it stays silent",
+        openMap: "Open in Maps", guideOpen: "Traveling from out of town? Tap to open our Cepu guide", guideClose: "Close the guide", dep: "Departs", arr: "Arrives", musicLoading: "Loading music… tap ♪ if it stays silent",
         play: "Play music", pause: "Pause music", prev: "Previous song", next: "Next song",
         tapAgain: "Tap again to play", musicMissing: "Music file not found",
         openInvite: "Open invitation", skip: "Skip to content", lang: "Language",
@@ -121,6 +121,7 @@ window.WEDDING = {
       guide: {
         title: "A Little Guide to Cepu",
         note: "“For our beloved family and friends traveling to celebrate with us at Gedung Soos Sasono Suko, here are our favorite local stays and the bride’s most cherished culinary spots to accompany your time in Cepu.”",
+        teaser: "Coming from out of town? Open our little guide to Cepu.", open: "Show the guide", close: "Hide the guide",
         aboutTitle: "About Cepu",
         about: "Known as Indonesia’s historic oil town, Cepu carries a rich heritage framed by colonial-era charm and quiet, leafy avenues. Behind its industrial legacy lies an unhurried haven, celebrated for bold local flavors and timeless traditional culinary treasures.",
         stayTitle: "Where to Stay",
@@ -131,8 +132,8 @@ window.WEDDING = {
         eatTitle: "Bride’s Favorite Culinary",
         eats: [
           { name: "Mie Ayam Sredek", text: "The bride’s ultimate comfort food that instantly won the groom’s heart on his very first visit to Cepu. With savory, deeply seasoned chicken and bouncy noodles, this local gem is a shared favorite.", extra: "A special treat: this dish will also be served directly at our wedding reception!" },
-          { name: "Lontong Opor Kapuan Pak Pangat", text: "Legendary tender free-range chicken cooked in a deeply flavorful yellow spice broth, poured generously over soft handmade rice cakes. A legendary must-visit spot in Kapuan." },
-          { name: "Pecel Pincuk PEM Akamigas", text: "Fresh blanched greens bathed in fragrant, nutty kencur peanut sauce served on a traditional banana leaf fold. Perfect for a refreshing and nostalgic morning breakfast." },
+          { name: "Lontong Opor Kapuan Pak Pangat", extra: "Good to know: please book one day ahead (D-1)—this spot often sells out quickly.", text: "Legendary tender free-range chicken cooked in a deeply flavorful yellow spice broth, poured generously over soft handmade rice cakes. A legendary must-visit spot in Kapuan.", extra: "Good to know: this spot often sells out quickly, so please book one day ahead (D-1)." },
+          { name: "Pecel Pincuk Pojokan Kapur Tulis Sebelah PEM Akamigas", url: "https://www.google.com/maps/place/RAWON+DAN+PECEL+PINCUK+Cepu/@-7.1389982,111.5951571,17z/data=!3m1!4b1!4m6!3m5!1s0x2e77644125dc285d:0xe5dd1d40b7b97548!8m2!3d-7.1389982!4d111.597732!16s%2Fg%2F11c2p12dmd", text: "Fresh blanched greens bathed in fragrant, nutty kencur peanut sauce served on a traditional banana leaf fold. Perfect for a refreshing and nostalgic morning breakfast." },
           { name: "Ayam Panggang Mak Gogok", text: "A culinary gem tucked in the heart of traditional wood-fire cooking—juicy kampung chicken marinated in rich Javanese spices, grilled to perfection with an unforgettable smokiness." }
         ],
         trainTitle: "Getting to Cepu", trainSub: "By Train (Recommended)",
@@ -181,7 +182,7 @@ window.WEDDING = {
         viewMap: "Lihat peta", mapTitle: "Peta menuju ", dress: "Kode busana",
         openPhoto: "Buka foto: ", noPhotos: "Foto masih dimuat",
         songsHint: "Ketuk lagu untuk memutarnya",
-        openMap: "Buka di Peta", dep: "Berangkat", arr: "Tiba", musicLoading: "Memuat musik… ketuk ♪ jika masih sunyi",
+        openMap: "Buka di Peta", guideOpen: "Datang dari luar kota? Ketuk untuk melihat panduan Cepu", guideClose: "Tutup panduan", dep: "Berangkat", arr: "Tiba", musicLoading: "Memuat musik… ketuk ♪ jika masih sunyi",
         play: "Putar musik", pause: "Jeda musik", prev: "Lagu sebelumnya", next: "Lagu berikutnya",
         tapAgain: "Ketuk sekali lagi untuk memutar", musicMissing: "Berkas musik tidak ditemukan",
         openInvite: "Buka undangan", skip: "Lewati ke konten", lang: "Bahasa",
@@ -228,6 +229,7 @@ window.WEDDING = {
       guide: {
         title: "Panduan Singkat Kota Cepu",
         note: "“Bagi keluarga dan sahabat terkasih yang datang dari jauh untuk merayakan hari bahagia kami di Gedung Soos Sasono Suko, berikut rekomendasi hotel favorit serta deretan kuliner pilihan sang mempelai wanita untuk menemani kunjungan Anda di Cepu.”",
+        teaser: "Datang dari luar kota? Buka panduan singkat kota Cepu.", open: "Lihat panduan", close: "Tutup panduan",
         aboutTitle: "Sekilas Tentang Cepu",
         about: "Dikenal luas sebagai kota minyak bersejarah di Jawa Tengah, Cepu menyimpan pesona peninggalan era kolonial di antara sudut kotanya yang teduh. Di balik riwayat industrinya, kota tenang ini merupakan surga tersembunyi bagi para pencinta kuliner otentik yang kaya rempah dan melegenda.",
         stayTitle: "Rekomendasi Hotel",
@@ -238,8 +240,8 @@ window.WEDDING = {
         eatTitle: "Kuliner Pilihan Mempelai Wanita",
         eats: [
           { name: "Mie Ayam Sredek", text: "Kuliner kenyamanan andalan sang mempelai wanita yang langsung memikat lidah sang mempelai pria saat pertama kali berkunjung ke Cepu. Perpaduan bumbu ayam yang gurih meresap dan tekstur mie kenyal menjadikannya menu favorit berdua.", extra: "Kabar gembira: sajian lezat ini juga akan hadir langsung di resepsi pernikahan kami!" },
-          { name: "Lontong Opor Kapuan Pak Pangat", text: "Kuliner legendaris dengan ayam kampung empuk berselimut kuah opor kuning kaya rempah yang khas, disajikan bersama lontong lembut. Wajib dikunjungi saat berada di Cepu." },
-          { name: "Pecel Pincuk PEM Akamigas", text: "Sayuran segar dengan siraman sambal pecel kencur yang harum dan gurih, disajikan di atas pincuk daun pisang. Pilihan sempurna untuk sarapan pagi yang nikmat." },
+          { name: "Lontong Opor Kapuan Pak Pangat", extra: "Info penting: sebaiknya pesan H-1 karena sering cepat habis.", text: "Kuliner legendaris dengan ayam kampung empuk berselimut kuah opor kuning kaya rempah yang khas, disajikan bersama lontong lembut. Wajib dikunjungi saat berada di Cepu.", extra: "Info penting: sering cepat habis, sebaiknya pesan satu hari sebelumnya (H-1)." },
+          { name: "Pecel Pincuk Pojokan Kapur Tulis Sebelah PEM Akamigas", url: "https://www.google.com/maps/place/RAWON+DAN+PECEL+PINCUK+Cepu/@-7.1389982,111.5951571,17z/data=!3m1!4b1!4m6!3m5!1s0x2e77644125dc285d:0xe5dd1d40b7b97548!8m2!3d-7.1389982!4d111.597732!16s%2Fg%2F11c2p12dmd", text: "Sayuran segar dengan siraman sambal pecel kencur yang harum dan gurih, disajikan di atas pincuk daun pisang. Pilihan sempurna untuk sarapan pagi yang nikmat." },
           { name: "Ayam Panggang Mak Gogok", text: "Kuliner legendaris dengan olahan ayam kampung berbumbu rempah meresap yang dipanggang di atas tungku kayu bakar, menghasilkan aroma asap gurih yang khas dan tak terlupakan." }
         ],
         trainTitle: "Panduan Transportasi", trainSub: "Moda Transportasi Kereta Api (Sangat Disarankan)",
