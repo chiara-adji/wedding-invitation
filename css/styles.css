@@ -577,3 +577,13 @@ h1{font-weight:400}h2,h3{font-weight:500}.count b{font-weight:400}.eyebrow{color
 /* v13b: envelope text colour fix, quieter paper behind text */
 .opening.dark .env2 .script{color:var(--moss)}.opening.dark .env2 .eyebrow{color:var(--forest)}.opening.dark .env2 .e-date{color:var(--forest)}
 .card,.e-card,.reply-wrap .reply-card,.letter-r .lp{background-image:linear-gradient(rgba(251,248,240,.84),rgba(251,248,240,.84)),url(../assets/art/paper.webp);background-color:#FBF8F0;background-size:auto,cover;background-position:0 0,center}
+
+/* ===== v14: lighter, more elegant type (only font weights that are actually loaded) ===== */
+body{font-synthesis:none}
+.script{font-weight:500;font-size:clamp(28px,7.4vw,36px);letter-spacing:.02em;line-height:1.2;color:var(--forest)}
+.script.sm,.reply label.script{font-size:clamp(23px,6.4vw,28px)}
+.dark .script{color:var(--paper)}
+.eyebrow{font-weight:600;letter-spacing:.3em}
+.e-card .e-date{font-weight:500;letter-spacing:.24em;color:var(--forest)}
+.cap,.gextra{font-weight:400}
+.chap h3,.gsub{font-weight:400}
