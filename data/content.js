@@ -14,8 +14,8 @@ window.WEDDING = {
   story: [ { photo: "assets/images/story-01" }, { photo: "assets/images/couple-01" }, { photo: "assets/images/hero" } ],
 
   events: [
-    { venue: "Gedung Soos Sasono Suko Cepu", address: "Cepu", mapUrl: "https://www.google.com/maps/search/?api=1&query=Gedung+Soos+Sasono+Suko+Cepu" },
-    { venue: "Gedung Soos Sasono Suko Cepu", address: "Cepu", mapUrl: "https://www.google.com/maps/search/?api=1&query=Gedung+Soos+Sasono+Suko+Cepu" }
+    { venue: "Gedung Soos Sasono Suko", address: "Cepu, Blora, Jawa Tengah", mapUrl: "https://www.google.com/maps/search/?api=1&query=Gedung+Soos+Sasono+Suko+Cepu" },
+    { venue: "Gedung Soos Sasono Suko", address: "Cepu, Blora, Jawa Tengah", mapUrl: "https://www.google.com/maps/search/?api=1&query=Gedung+Soos+Sasono+Suko+Cepu" }
   ],
   venueMap: { name: "Gedung Soos Sasono Suko Cepu", query: "Gedung Soos Sasono Suko Cepu" },
 
@@ -74,6 +74,7 @@ window.WEDDING = {
         viewMap: "View on map", mapTitle: "Map to ", dress: "Dress code",
         openPhoto: "Open photo: ", noPhotos: "Photos are still loading",
         songsHint: "Tap any song to play it",
+        openMap: "Open in Maps", dep: "Departs", arr: "Arrives", musicLoading: "Loading music… tap ♪ if it stays silent",
         play: "Play music", pause: "Pause music", prev: "Previous song", next: "Next song",
         tapAgain: "Tap again to play", musicMissing: "Music file not found",
         openInvite: "Open invitation", skip: "Skip to content", lang: "Language",
@@ -117,6 +118,32 @@ window.WEDDING = {
         parents: ["Mr. Tri Margono, S.T.", "Mrs. Dra. Tursiana Agustin"],
         address: "Jl. Mulawarman RT 14 No. 53, South Balikpapan, East Kalimantan" },
 
+      guide: {
+        title: "A Little Guide to Cepu",
+        note: "“For our beloved family and friends traveling to celebrate with us at Gedung Soos Sasono Suko, here are our favorite local stays and the bride’s most cherished culinary spots to accompany your time in Cepu.”",
+        aboutTitle: "About Cepu",
+        about: "Known as Indonesia’s historic oil town, Cepu carries a rich heritage framed by colonial-era charm and quiet, leafy avenues. Behind its industrial legacy lies an unhurried haven, celebrated for bold local flavors and timeless traditional culinary treasures.",
+        stayTitle: "Where to Stay",
+        stays: [
+          { name: "Hotel Ammi Cepu", text: "A colonial-heritage luxury boutique hotel offering timeless elegance, serene ambience, and top-tier hospitality. (~5 minutes to the venue)." },
+          { name: "Grand Mega Resort & Spa Cepu", text: "A full-service resort featuring spacious family rooms, lush gardens, swimming pool, and relaxing spa facilities. (~8 minutes to the venue)." }
+        ],
+        eatTitle: "Bride’s Favorite Culinary",
+        eats: [
+          { name: "Mie Ayam Sredek", text: "The bride’s ultimate comfort food that instantly won the groom’s heart on his very first visit to Cepu. With savory, deeply seasoned chicken and bouncy noodles, this local gem is a shared favorite.", extra: "A special treat: this dish will also be served directly at our wedding reception!" },
+          { name: "Lontong Opor Kapuan Pak Pangat", text: "Legendary tender free-range chicken cooked in a deeply flavorful yellow spice broth, poured generously over soft handmade rice cakes. A legendary must-visit spot in Kapuan." },
+          { name: "Pecel Pincuk PEM Akamigas", text: "Fresh blanched greens bathed in fragrant, nutty kencur peanut sauce served on a traditional banana leaf fold. Perfect for a refreshing and nostalgic morning breakfast." },
+          { name: "Ayam Panggang Mak Gogok", text: "A culinary gem tucked in the heart of traditional wood-fire cooking—juicy kampung chicken marinated in rich Javanese spices, grilled to perfection with an unforgettable smokiness." }
+        ],
+        trainTitle: "Getting to Cepu", trainSub: "By Train (Recommended)",
+        trainIntro: "For our friends and family traveling by rail, please take your train to Stasiun Cepu. Gedung Soos Sasono Suko is conveniently located just a 5-minute drive from the station via local transport or ride-hailing services.",
+        routes: [
+          { from: "From Semarang Poncol", train: "KA Ambarawa Ekspres Pagi", dep: "08:30 WIB", arr: "10:47 WIB", note: "Giving you comfortable timing right before the 12:00 PM reception begins." },
+          { from: "From Surabaya Pasarturi", train: "KA Sembrani (Executive)", dep: "07:50 WIB", arr: "09:40 WIB", note: "Ideal for a relaxed arrival and freshening up." },
+          { from: "From Surabaya Pasarturi", train: "Commuter Line Blorasura", dep: "08:10 WIB", arr: "10:45 WIB", note: "Arrives just over an hour before the reception starts." }
+        ],
+        returnNote: "Return trips: Several comfortable afternoon and evening trains to both Semarang and Surabaya depart after 15:00 WIB."
+      },
       gifts: { addressLabel: "Gift address", addressText: "Balikpapan [full address to be added]" },
       registry: [ { name: "Our wishlist", note: "" } ]
     },
@@ -154,6 +181,7 @@ window.WEDDING = {
         viewMap: "Lihat peta", mapTitle: "Peta menuju ", dress: "Kode busana",
         openPhoto: "Buka foto: ", noPhotos: "Foto masih dimuat",
         songsHint: "Ketuk lagu untuk memutarnya",
+        openMap: "Buka di Peta", dep: "Berangkat", arr: "Tiba", musicLoading: "Memuat musik… ketuk ♪ jika masih sunyi",
         play: "Putar musik", pause: "Jeda musik", prev: "Lagu sebelumnya", next: "Lagu berikutnya",
         tapAgain: "Ketuk sekali lagi untuk memutar", musicMissing: "Berkas musik tidak ditemukan",
         openInvite: "Buka undangan", skip: "Lewati ke konten", lang: "Bahasa",
@@ -197,6 +225,32 @@ window.WEDDING = {
         parents: ["Bapak Tri Margono, S.T.", "Ibu Dra. Tursiana Agustin"],
         address: "Jl. Mulawarman RT 14 No. 53, Balikpapan Selatan, Balikpapan, Kalimantan Timur" },
 
+      guide: {
+        title: "Panduan Singkat Kota Cepu",
+        note: "“Bagi keluarga dan sahabat terkasih yang datang dari jauh untuk merayakan hari bahagia kami di Gedung Soos Sasono Suko, berikut rekomendasi hotel favorit serta deretan kuliner pilihan sang mempelai wanita untuk menemani kunjungan Anda di Cepu.”",
+        aboutTitle: "Sekilas Tentang Cepu",
+        about: "Dikenal luas sebagai kota minyak bersejarah di Jawa Tengah, Cepu menyimpan pesona peninggalan era kolonial di antara sudut kotanya yang teduh. Di balik riwayat industrinya, kota tenang ini merupakan surga tersembunyi bagi para pencinta kuliner otentik yang kaya rempah dan melegenda.",
+        stayTitle: "Rekomendasi Hotel",
+        stays: [
+          { name: "Hotel Ammi Cepu", text: "Hotel butik bernuansa kolonial klasik yang mewah, tenang, dan sangat nyaman dengan pelayanan terbaik. Berjarak sekitar 5 menit ke gedung acara." },
+          { name: "Grand Mega Resort & Spa Cepu", text: "Resor lengkap dengan kamar keluarga yang luas, area taman asri, kolam renang, dan fasilitas relaksasi spa. Sekitar 8 menit menuju lokasi acara." }
+        ],
+        eatTitle: "Kuliner Pilihan Mempelai Wanita",
+        eats: [
+          { name: "Mie Ayam Sredek", text: "Kuliner kenyamanan andalan sang mempelai wanita yang langsung memikat lidah sang mempelai pria saat pertama kali berkunjung ke Cepu. Perpaduan bumbu ayam yang gurih meresap dan tekstur mie kenyal menjadikannya menu favorit berdua.", extra: "Kabar gembira: sajian lezat ini juga akan hadir langsung di resepsi pernikahan kami!" },
+          { name: "Lontong Opor Kapuan Pak Pangat", text: "Kuliner legendaris dengan ayam kampung empuk berselimut kuah opor kuning kaya rempah yang khas, disajikan bersama lontong lembut. Wajib dikunjungi saat berada di Cepu." },
+          { name: "Pecel Pincuk PEM Akamigas", text: "Sayuran segar dengan siraman sambal pecel kencur yang harum dan gurih, disajikan di atas pincuk daun pisang. Pilihan sempurna untuk sarapan pagi yang nikmat." },
+          { name: "Ayam Panggang Mak Gogok", text: "Kuliner legendaris dengan olahan ayam kampung berbumbu rempah meresap yang dipanggang di atas tungku kayu bakar, menghasilkan aroma asap gurih yang khas dan tak terlupakan." }
+        ],
+        trainTitle: "Panduan Transportasi", trainSub: "Moda Transportasi Kereta Api (Sangat Disarankan)",
+        trainIntro: "Bagi keluarga dan kerabat yang memilih jalur kereta, tujuan akhir perjalanan adalah Stasiun Cepu. Lokasi acara di Gedung Soos Sasono Suko sangat dekat, hanya sekitar 5 menit berkendara dari stasiun menggunakan transportasi lokal atau ojek/taksi online.",
+        routes: [
+          { from: "Dari Stasiun Semarang Poncol", train: "KA Ambarawa Ekspres Pagi", dep: "08.30 WIB", arr: "10.47 WIB", note: "Waktu tiba ini sangat pas sebelum resepsi dimulai pukul 12.00 WIB." },
+          { from: "Dari Stasiun Surabaya Pasarturi", train: "KA Sembrani (Eksekutif)", dep: "07.50 WIB", arr: "09.40 WIB", note: "Sangat leluasa untuk check-in atau bersiap santai." },
+          { from: "Dari Stasiun Surabaya Pasarturi", train: "Commuter Line Blorasura", dep: "08.10 WIB", arr: "10.45 WIB", note: "Tiba sekitar 1 jam 15 menit sebelum acara dimulai." }
+        ],
+        returnNote: "Perjalanan pulang: Tersedia beragam pilihan jadwal kereta sore dan malam menuju Semarang maupun Surabaya yang berangkat setelah pukul 15.00 WIB."
+      },
       gifts: { addressLabel: "Alamat pengiriman hadiah", addressText: "Balikpapan [alamat lengkap akan ditambahkan]" },
       registry: [ { name: "Wishlist kami", note: "" } ]
     }
