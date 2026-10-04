@@ -471,3 +471,58 @@ body.locked .hero-deco .draw path{animation-play-state:paused}
 .canopy .pj{width:46%}.canopy .pj.l{left:-6%}.canopy .pj.r{right:-6%}
 @media(min-width:1024px){.side-top .pj{width:clamp(200px,24vw,360px)}}
 .dark .map-btn{color:var(--ivory);border-color:rgba(245,239,227,.7)}.dark .map-btn:hover{background:var(--ivory);color:var(--forest)}
+
+/* ===== v9: realistic envelope, frames, new Javanese elements ===== */
+.opening .env2{position:relative;z-index:2}
+.env2{position:relative;width:min(360px,88vw);aspect-ratio:735/880;margin:0 auto}
+.env2 .e-back,.env2 .e-front{position:absolute;inset:0;width:100%;height:100%;max-width:none;display:block}
+.env2 .e-back{filter:drop-shadow(0 16px 20px rgba(0,0,0,.4))}.env2 .e-front{z-index:3}
+.e-card{position:absolute;left:19%;right:19%;top:19%;height:62%;z-index:2;display:grid;align-content:start;justify-items:center;text-align:center;padding:13% 8% 0;gap:2px;
+  background:#FBF8F0 url(../assets/art/paper.webp) center/cover;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 3px 9px rgba(0,0,0,.28);transition:transform 1.1s cubic-bezier(.22,.61,.36,1)}
+.e-card .eyebrow{font-size:10px;color:var(--ink-soft)}.e-card .script{font-size:clamp(25px,7.6vw,32px);color:var(--moss);line-height:1.1}
+.e-card .e-date{font-size:10px;letter-spacing:.12em;margin-top:6px}
+.opened .e-card{transform:translateY(-30%)}
+.e-to{position:absolute;left:8%;right:8%;bottom:13.5%;z-index:4;text-align:center}
+.e-to .eyebrow{font-size:10.5px;color:#6c6852}.e-to .script{font-size:clamp(20px,6.2vw,28px);color:var(--moss);line-height:1.1;overflow-wrap:anywhere}
+.env2 .seal{position:absolute;left:50%;top:64.4%;z-index:5;width:84px;height:84px;margin:-42px 0 0 -42px}
+.env2 .env-tag{right:-10px;bottom:-18px;width:74px}
+.opened .seal{opacity:0;animation:none;pointer-events:none}
+/* photo frames */
+.frm{position:relative;margin:0 auto}
+.frm-img{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.frm-ph{position:absolute;z-index:1;border-radius:50%;overflow:hidden;background:var(--linen)}
+.frm-ph img{width:100%;height:100%;object-fit:cover;object-position:60% 38%;transform:scale(1.2);transform-origin:58% 42%}
+.cd-frm{width:min(250px,66vw);margin:22px auto}.story-frm{width:min(250px,68vw);margin:0 auto 34px}
+/* verse divider + moments flowers */
+.lace-rule{width:min(260px,70%);margin:6px auto 22px}.lace-rule img{width:100%}
+.canopy{height:150px;margin:0 auto -6px}.canopy .cb{position:absolute;bottom:0;width:34%;transform-origin:50% 100%}.canopy .cb.l{left:-3%}.canopy .cb.r{right:-3%;scale:-1 1}
+/* events top art: gunungan + batik fans */
+.way-art{display:flex;justify-content:center;align-items:flex-end;gap:10px;min-height:0;height:150px;margin:0 auto 22px}
+.way-art .gn{width:92px}.way-art .fn{width:88px}.way-art .fn.l{rotate:-10deg}.way-art .fn.r{scale:-1 1;rotate:-10deg}
+.scene-c{width:min(300px,78vw);opacity:1}.scene-c img{width:100%}
+/* player: title + singer under the bar */
+.np-in{display:grid;line-height:1.25;margin-top:2px}.np-in b{font:500 17px var(--f-disp);color:var(--paper)}.np-in i{font-size:13.5px;color:var(--mist)}
+.ctl .tm{display:none}
+.songs{max-width:300px;gap:5px}.songs-h{margin:20px 0 8px;font-size:10.5px}
+.sg{padding:6px 12px;gap:10px;border-radius:9px}.sg .n{font-size:18px;width:16px}.sg b{font-size:15.5px}.sg i{font-size:12.5px}
+/* desktop side panel: no joglo here */
+.side-top .sp{position:absolute;pointer-events:none}.side-top .sp1{left:5%;top:5%;width:28%;rotate:-14deg}.side-top .sp2{right:8%;top:7%;width:20%}.side-top .sp3{right:26%;top:24%;width:12%}
+.side-bt .sb{position:absolute;bottom:0}.side-bt{height:42vh}.side-bt .a{left:-4%;width:36%}.side-bt .b{left:32%;width:36%;bottom:4%}.side-bt .c{right:-3%;width:34%}
+.hero-deco .bt{width:min(520px,72%)}
+
+/* ===== v10: city guide + music loading ring ===== */
+.gtitle{position:relative;width:min(350px,94vw);margin:0 auto 18px}.gtitle img{width:100%}
+.gtitle h2{position:absolute;left:13%;right:13%;top:50%;transform:translateY(-50%);margin:0;font-size:clamp(16px,5vw,22px);font-weight:500;line-height:1.15}.gtitle h2::after{display:none}
+.gnote{font:italic 17px/1.6 var(--f-disp);max-width:440px;margin:0 auto;color:var(--ink-soft)}
+.ggroup{margin-top:40px}.ggroup>.eyebrow{margin-bottom:16px;color:var(--moss)}
+.gplace{margin-top:12px;padding:24px 20px 12px}.gplace h3{font-size:22px;margin-bottom:6px}.gplace p{font-size:16px;line-height:1.55}
+.gextra{margin-top:10px;font-style:italic;color:var(--claret)}.gmap{font-size:11px}
+.gsub{font:italic 500 20px/1.3 var(--f-disp);color:var(--forest);margin-bottom:8px}.gtxt{font-size:16px;line-height:1.6;max-width:440px;margin:0 auto 6px}
+.ticket{margin-top:12px;padding:22px 18px 16px}.ticket h3{font-size:21px;margin:2px 0}
+.tk{display:flex;justify-content:center;align-items:center;gap:22px;margin:12px 0 6px}
+.tk small{display:block;font:600 10px var(--f-disp);letter-spacing:.2em;text-transform:uppercase;color:var(--moss)}.tk b{font:300 30px/1.1 var(--f-disp);color:var(--forest)}.tk .arr{font-size:22px;color:var(--sage)}
+.gret{margin-top:16px;max-width:420px;margin-inline:auto}
+.music.loading::after,.pp.loading::after{content:"";position:absolute;inset:-5px;border:2px solid transparent;border-top-color:var(--moss);border-radius:50%;animation:spin .9s linear infinite}
+.pp.loading::after{border-top-color:var(--mist)}
+.tk{gap:14px}.tk b{font-size:25px;white-space:nowrap}
+.ggroup:first-of-type .gtxt{font-size:17px;line-height:1.65}
