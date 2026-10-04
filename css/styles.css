@@ -526,3 +526,38 @@ body.locked .hero-deco .draw path{animation-play-state:paused}
 .pp.loading::after{border-top-color:var(--mist)}
 .tk{gap:14px}.tk b{font-size:25px;white-space:nowrap}
 .ggroup:first-of-type .gtxt{font-size:17px;line-height:1.65}
+
+/* ===== v11: collapsible city guide, envelope card fit ===== */
+.e-card{padding-top:9%}.e-card .script{font-size:clamp(22px,6.6vw,27px);white-space:nowrap}.e-card .e-date{margin-top:4px;font-size:11px;letter-spacing:.2em}
+.guide{background:#EFE7D6 url(../assets/art/paper.webp) center/cover}
+.gteaser{font:italic 18px/1.5 var(--f-disp);color:var(--ink-soft);max-width:420px;margin:0 auto 18px}
+.gtoggle{min-height:48px}
+.gbody{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .7s var(--ease),visibility 0s .7s}
+.guide.open .gbody{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .7s var(--ease),visibility 0s}
+.gin{min-height:0;overflow:hidden;text-align:center}.guide.open .gin{padding-top:26px}
+.gend{margin-top:36px}.guide:not(.open) .gtoggle.bot{display:none}
+@media(prefers-reduced-motion:reduce){.gbody{transition:none}}
+.gtoggle{margin:4px auto 0;padding:0 26px;font:italic 500 17px var(--f-disp);letter-spacing:.03em;text-transform:none;color:var(--forest);border-color:var(--moss);background:rgba(251,248,240,.6)}
+.gtoggle::after{content:"▾";margin-left:10px;display:inline-block;transition:transform .3s}.gtoggle[aria-expanded=true]::after{transform:rotate(180deg)}
+.guide .gnote{color:var(--forest)}
+
+/* ===== v12: stationery backgrounds (9-slice cards, section backdrops) ===== */
+#verse{background:linear-gradient(rgba(245,239,227,.42),rgba(245,239,227,.42)),url(../assets/art/bg-leaves.webp) center/cover}
+#couple{background:linear-gradient(rgba(245,239,227,.46),rgba(245,239,227,.46)),url(../assets/art/bg-lace-taupe.webp) center/cover}
+#playlist,#guide{background:linear-gradient(rgba(245,239,227,.6),rgba(245,239,227,.6)),url(../assets/art/bg-lace-green.webp) 0 0/400px auto}
+/* event + train cards become tickets */
+.ev.card,.ticket.card{background:none;box-shadow:none;border-style:solid;border-color:transparent;border-width:30px;border-image:url(../assets/art/frame-ticket.webp) 92 fill / 30px stretch;padding:4px 6px 8px}
+.ev.card::before,.ev.card::after,.ticket.card::before{display:none}
+.ev.card .meta,.ticket.card .meta{color:var(--ink-soft)}
+/* RSVP: green letter with sage wax seal */
+.reply-card{background:none;box-shadow:none;border-style:solid;border-color:transparent;border-width:84px 26px 48px;border-image:url(../assets/art/letter-green.webp) 175 52 100 52 fill / 84px 26px 48px stretch;
+  padding:4px 6px 0;max-width:440px;margin-inline:auto}
+.reply-card::before{display:none}.reply-card .vf{margin:14px -6px -34px}
+/* gift message: painted roses letter with wax seal */
+.letter-r{border-style:solid;border-color:transparent;border-width:112px 28px 66px;border-image:url(../assets/art/letter-roses.webp) 262 62 152 62 fill / 112px 28px 66px stretch;
+  max-width:420px;margin:24px auto 30px;padding:2px 8px 0;color:var(--ink);font:italic 17px/1.6 var(--f-disp);text-align:center}
+.letter-r p{margin:0;color:var(--ink)}
+/* closing statement on the lake painting */
+.lake{position:relative;aspect-ratio:675/1380;width:min(420px,100%);margin:0 auto 10px;background:url(../assets/art/lake-card.webp) center/100% 100% no-repeat}
+.lake-t{position:absolute;left:19.5%;right:19.5%;top:36.4%;height:20.6%;display:grid;place-items:center;text-align:center}
+.closing .lake .msg-c{color:var(--forest);font:italic clamp(11.5px,3.3vw,14.5px)/1.45 var(--f-disp);margin:0}
