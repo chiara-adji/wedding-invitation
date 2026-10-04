@@ -28,7 +28,7 @@
     img.src = cand[0]; return img;
   }
   const toast = msg => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1800); };
-  const canopy = () => h("div", { class: "canopy", "aria-hidden": "true" }, h("img", { src: "assets/images/janur.jpeg", alt: "", loading: "lazy" }), h("img", { class: "r", src: "assets/images/janur.jpeg", alt: "", loading: "lazy" }));
+  const canopy = () => h("div", { class: "canopy", "aria-hidden": "true" }, h("img", { src: "assets/art/penjor.svg", alt: "", loading: "lazy" }), h("img", { class: "r", src: "assets/art/penjor.svg", alt: "", loading: "lazy" }));
   const rule = () => { const d = h("div", { class: "divider rv" }); d.innerHTML = Art.divider(); return d; };
   const head = (eyebrow, whisper, title) => [
     h("p", { class: "eyebrow rv", text: eyebrow }),
@@ -84,7 +84,7 @@
       c.date ? h("p", { class: "meta", text: c.date }) : null, h("h3", { text: c.title }),
       c.photo ? h("figure", { class: "arch chap-ph" }, photo(c.photo, c.title)) : null,
       h("p", { class: "dc", text: c.text }), Art.corner("l"), Art.corner("r"))));
-    const banner = h("div", { class: "arch story-arch rv" }, h("img", { src: "assets/images/art-scene.jpg", alt: "Painted garden with a joglo house", loading: "lazy" }));
+    const banner = h("div", { class: "arch story-arch rv" }, h("img", { src: "assets/art/scene.svg", alt: "Painted garden with a joglo house", loading: "lazy" }));
     const s = section("story", "", banner, ...head("", "", T.storyTitle), chaps, quote(W.quotes.story));
     $("h2", s).id = "story-t"; return s;
   }
@@ -97,7 +97,7 @@
     const s = section("events", "dark", ...head("", "", T.eventsTitle), cards,
       W.venueMap ? h("div", { class: "map rv" }, h("iframe", { title: "Map to " + W.venueMap.name, src: "https://www.google.com/maps?q=" + encodeURIComponent(W.venueMap.query) + "&output=embed", loading: "lazy", referrerpolicy: "no-referrer-when-downgrade" })) : null,
       W.dressCode ? [rule(), h("p", { class: "eyebrow", text: "Dress code" }), h("p", { class: "rv", text: W.dressCode })] : null);
-    $(".wrap", s).prepend(h("img", { class: "ink rv", src: "assets/images/art-joglo-ink.jpg", alt: "Ink drawing of a joglo house", loading: "lazy" })); $("h2", s).id = "events-t"; return s;
+    $(".wrap", s).prepend(h("img", { class: "ink rv", src: "assets/art/ink.svg", alt: "Ink drawing of a joglo house", loading: "lazy" })); $("h2", s).id = "events-t"; return s;
   }
 
   function Gallery() {
