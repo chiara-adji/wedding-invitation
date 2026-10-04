@@ -70,6 +70,7 @@
     all("#music,.pp").forEach(b => { b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", on ? U.pause : U.play); });
     all(".vinyl").forEach(v => v.classList.toggle("spin", on));
     all(".sk.bk").forEach(b => b.setAttribute("aria-label", U.prev)); all(".sk.nx").forEach(b => b.setAttribute("aria-label", U.next));
+    all(".sg").forEach(b => { const c = +b.dataset.i === ti; b.classList.toggle("cur", c); b.classList.toggle("on", c && on); });
     const tr = tracks[ti];
     if (tr) { all(".np-t").forEach(e => e.textContent = tr.title); all(".np-a").forEach(e => e.textContent = tr.artist); }
   }
@@ -141,7 +142,7 @@
         h("span", { class: "num", "aria-hidden": "true", text: roman[i] || String(i + 1) }),
         c.date ? h("p", { class: "meta", text: c.date }) : null, h("h3", { text: c.title }),
         base.photo ? h("figure", { class: "pol-s chap-ph" }, photo(base.photo, c.title)) : null,
-        h("p", { class: "dc", text: c.text }), Art.corner("l"), Art.corner("r")); }));
+        h("p", { class: "dc", text: c.text }), Art.corner("l"), Art.corner("r"), Art.stick(["hummer", "dove", "rings"][i % 3], "dk p-tr w2 float")); }));
     const s = section("story", "", art("story-art rv", Art.archScene()), ...head("", "", T.storyTitle), chaps, quote(D.quotes.story));
     $("h2", s).id = "story-t"; return s;
   }
@@ -150,10 +151,10 @@
     const cards = W.events.map((e, i) => { const t = D.events[i] || {};
       return h("div", { class: "card ev tape rv" },
         h("h3", { text: t.name }), h("p", { class: "meta", text: t.date }), ...[].concat(t.time || []).map(x => h("p", { class: "meta", text: x })),
-        h("p", { text: e.venue }), h("p", { class: "cap", text: e.address }),
-        e.mapUrl ? h("a", { class: "btn ghost", href: e.mapUrl, target: "_blank", rel: "noopener", text: U.viewMap }) : null); });
+        h("p", { text: e.venue }), h("p", { class: "cap", text: e.address })); });
     const s = section("events", "dark", ...head("", "", T.eventsTitle), cards,
       W.venueMap ? h("div", { class: "map rv" }, h("iframe", { title: U.mapTitle + W.venueMap.name, src: "https://www.google.com/maps?q=" + encodeURIComponent(W.venueMap.query) + "&output=embed", loading: "lazy", referrerpolicy: "no-referrer-when-downgrade" })) : null,
+      W.venueMap ? h("a", { class: "btn ghost map-btn rv", href: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(W.venueMap.query), target: "_blank", rel: "noopener", text: U.viewMap }) : null,
       D.dressCode ? [rule(), h("p", { class: "eyebrow", text: U.dress }), h("p", { class: "rv", text: D.dressCode })] : null);
     $(".wrap", s).prepend(art("way-art rv", Art.way())); $("h2", s).id = "events-t"; return s;
   }
@@ -192,7 +193,10 @@
       h("div", { class: "player rv" }, h("div", { class: "cover" }, photo(W.hero.photo, D.heroAlt)),
         h("div", { class: "ctl" }, h("div", { class: "btns" }, skip("bk", ICON_PREV, -1), pp, skip("nx", ICON_NEXT, 1)),
           prog, h("span", { class: "tm cap", text: "0:00" }))),
-      rec, h("h3", { class: "np-t rv" }), h("p", { class: "np-a meta rv" }));
+      rec, h("h3", { class: "np-t rv" }), h("p", { class: "np-a meta rv" }),
+      h("p", { class: "songs-h eyebrow rv", text: U.songsHint }),
+      h("ol", { class: "songs rv" }, tracks.map((t, i) => h("li", {}, h("button", { type: "button", class: "sg", "data-i": i, onclick: () => { load(i); play(); } },
+        h("span", { class: "n", text: i + 1 }), h("span", { class: "tt" }, h("b", { text: t.title }), h("i", { text: t.artist })))))));
   }
 
   let rsvpDone = null;
@@ -285,7 +289,7 @@
     const fam = (label, p) => h("div", { class: "fam rv" }, h("p", { class: "eyebrow", text: label }),
       h("p", { class: "pn", text: p.parents[0] }), h("p", { class: "pn", text: "& " + p.parents[1] }), h("p", { class: "addr", text: p.address }));
     return h("section", { id: "closing", class: "sec dark closing", "aria-labelledby": "closing-t" }, h("div", { class: "wrap" },
-      rule(), h("p", { id: "closing-t", class: "msg-c rv", text: T.closing }), quote(D.quotes.close),
+      rule(), h("div", { class: "cart rv" }, h("p", { id: "closing-t", class: "msg-c", text: T.closing })), quote(D.quotes.close),
       h("p", { class: "script joy rv", text: U.joy }),
       fam(U.brideLbl, D.bride), h("p", { class: "fam-sep rv", "aria-hidden": "true", text: "&" }), fam(U.groomLbl, D.groom),
       art("scene-c rv", Art.scene()), h("p", { class: "meta rv", text: D.dateLabel })));
@@ -298,6 +302,15 @@
     $("#main").replaceChildren(Hero(), Verse(), Couple(), Playlist(), Countdown(), Story(), Events(), Gallery(), Rsvp(st), Gift(), Registry(), Wishes(), Closing());
     ["events", "gift"].forEach(id => $("#" + id).append(Art.corner("l"), Art.corner("r")));
     all("#main .rv").forEach((el, i) => { if (instant) el.classList.add("in"); else { el.style.transitionDelay = (i % 4) * 80 + "ms"; io.observe(el); } });
+    const DECO = {
+      verse: [["stamp-flower", "p-tr w2 rot2 float"], ["hummer", "p-bl w2 fly"]], couple: [["dove", "p-tr w3 float"], ["stamp-bird", "p-bl w2 rot1 float2"]],
+      playlist: [["lanterns", "p-tl w2 swing"], ["hummer", "p-br w2 fly"]], countdown: [["lanterns", "p-tl w2 swing"], ["lanterns", "p-tr w2 swing flip"], ["lace-fan", "p-br w3 float"]],
+      story: [["lily-white", "p-tr w3 sway"], ["stamp-tulip", "p-bl w2 rot1 float"]], events: [["candi", "p-tr w3 float"], ["stamp-bird", "p-bl w2 rot2 float2"]],
+      gallery: [["stamp-flower", "p-tl w2 rot1 float"], ["key", "p-br w2 rot2 float2"]], rsvp: [["seal", "p-tr w2 rot2 float"], ["tag", "p-tl w2 rot1 swing"]],
+      gift: [["locket", "p-tr w1 float"], ["rings", "p-bl w2 rot1 float2"]], registry: [["gold-flora", "p-tr w2 sway"], ["key", "p-bl w2 rot1 float"]],
+      wishes: [["dove", "p-tl w3 float"], ["lov", "p-br w2 sway"]], closing: [["lily-white", "p-bl w4 sway"], ["lily-pink", "p-br w4 sway flip"], ["fan-batik", "p-tr w3 float"]]
+    };
+    Object.entries(DECO).forEach(([id, l]) => { const s = $("#" + id); if (s) l.forEach(([n, c]) => s.append(Art.stick(n, "dk " + c))); });
     syncAudio();
   }
 
