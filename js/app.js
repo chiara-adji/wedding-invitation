@@ -28,6 +28,7 @@
     img.src = cand[0]; return img;
   }
   const toast = msg => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1800); };
+  const canopy = () => h("div", { class: "canopy", "aria-hidden": "true" }, h("img", { src: "assets/images/janur.jpeg", alt: "", loading: "lazy" }), h("img", { class: "r", src: "assets/images/janur.jpeg", alt: "", loading: "lazy" }));
   const rule = () => { const d = h("div", { class: "divider rv" }); d.innerHTML = Art.divider(); return d; };
   const head = (eyebrow, whisper, title) => [
     h("p", { class: "eyebrow rv", text: eyebrow }),
@@ -52,25 +53,19 @@
 
   /* ---------- Components ---------- */
   function Hero() {
-    const s = section("hero", "hero");
-    s.prepend(h("div", { class: "bg", "data-parallax": "", "aria-hidden": "true" }));
-    ["l", "r"].forEach(x => s.append(h("img", { class: "janur " + x, src: "assets/images/janur.jpeg", alt: "", "aria-hidden": "true" })));
-    const frame = h("div", { class: "lace-frame rv" });
-    frame.innerHTML = Art.lace();
-    const pol = (g, cls) => h("figure", { class: "pol " + cls }, photo(g.src, g.alt));
-    frame.append(h("div", { class: "oval" }, photo(W.hero.photo, W.hero.alt)), pol(W.gallery[0], "p1"), pol(W.gallery[2], "p2"));
-    $(".wrap", s).append(
+    return h("section", { id: "hero", class: "hero", "aria-labelledby": "hero-t" }, h("div", { class: "hero-art" },
       h("p", { class: "eyebrow rv", text: T.invite }),
       h("h1", { id: "hero-t", class: "rv" }, W.couple.a, h("span", { class: "amp", text: "&" }), W.couple.b),
-      h("p", { class: "meta date rv", text: W.dateLabel }), frame, quote(W.quotes.hero));
-    return s;
+      h("p", { class: "meta date rv", text: W.dateLabel })));
   }
 
   function Countdown() {
     const s = section("countdown", "dark", ...head(T.countdownTitle, "", ""));
     const box = h("div", { class: "count rv", role: "timer", "aria-label": "Time remaining" });
     const cells = ["Days", "Hours", "Min", "Sec"].map(l => { const b = h("b", { text: "0" }); box.append(h("div", {}, b, h("span", { text: l }))); return b; });
-    $(".wrap", s).append(box);
+    const frame = h("div", { class: "lace-frame rv" }); frame.innerHTML = Art.lace();
+    frame.append(h("div", { class: "oval" }, photo(W.hero.photo, W.hero.alt)));
+    $(".wrap", s).append(frame, quote(W.quotes.hero), box);
     $(".eyebrow", s).id = "countdown-t";
     const target = new Date(W.date).getTime();
     const tick = () => {
@@ -83,10 +78,14 @@
   }
 
   function Story() {
-    const tl = h("div", { class: "tl" }, W.story.map(c => h("article", { class: "rv" },
-      h("p", { class: "meta", text: c.date }), h("h3", { text: c.title }), h("p", { text: c.text }),
-      c.photo ? h("figure", { class: "pol-s" }, photo(c.photo, c.title)) : null)));
-    const s = section("story", "", ...head("", "", T.storyTitle), tl, quote(W.quotes.story));
+    const roman = ["I", "II", "III", "IV", "V", "VI"];
+    const chaps = h("div", { class: "chaps" }, W.story.map((c, i) => h("article", { class: "card chap rv" },
+      h("span", { class: "num", "aria-hidden": "true", text: roman[i] || String(i + 1) }),
+      c.date ? h("p", { class: "meta", text: c.date }) : null, h("h3", { text: c.title }),
+      c.photo ? h("figure", { class: "arch chap-ph" }, photo(c.photo, c.title)) : null,
+      h("p", { class: "dc", text: c.text }), Art.corner("l"), Art.corner("r"))));
+    const banner = h("div", { class: "arch story-arch rv" }, h("img", { src: "assets/images/art-scene.jpg", alt: "Painted garden with a joglo house", loading: "lazy" }));
+    const s = section("story", "", banner, ...head("", "", T.storyTitle), chaps, quote(W.quotes.story));
     $("h2", s).id = "story-t"; return s;
   }
 
@@ -98,14 +97,14 @@
     const s = section("events", "dark", ...head("", "", T.eventsTitle), cards,
       W.venueMap ? h("div", { class: "map rv" }, h("iframe", { title: "Map to " + W.venueMap.name, src: "https://www.google.com/maps?q=" + encodeURIComponent(W.venueMap.query) + "&output=embed", loading: "lazy", referrerpolicy: "no-referrer-when-downgrade" })) : null,
       W.dressCode ? [rule(), h("p", { class: "eyebrow", text: "Dress code" }), h("p", { class: "rv", text: W.dressCode })] : null);
-    const sc = h("div", { class: "rv" }); sc.innerHTML = Art.scene(); $(".wrap", s).prepend(sc); $("h2", s).id = "events-t"; return s;
+    $(".wrap", s).prepend(h("img", { class: "ink rv", src: "assets/images/art-joglo-ink.jpg", alt: "Ink drawing of a joglo house", loading: "lazy" })); $("h2", s).id = "events-t"; return s;
   }
 
   function Gallery() {
     const items = W.gallery;
     const grid = h("div", { class: "grid rv" }, items.map((p, i) => h("button", { type: "button", "aria-label": "Open photo: " + p.alt, onclick: () => LB.open(i) },
       p.src ? photo(p.src, p.alt, p) : h("div", { class: "ph", text: p.alt }))));
-    const s = section("gallery", "", ...head("", "", T.galleryTitle), grid, T.galleryCaption ? h("p", { class: "quote rv", text: T.galleryCaption }) : null);
+    const s = section("gallery", "", canopy(), ...head("", "", T.galleryTitle), grid, T.galleryCaption ? h("p", { class: "quote rv", text: T.galleryCaption }) : null);
     $("h2", s).id = "gallery-t"; return s;
   }
 
@@ -125,7 +124,7 @@
 
   function Playlist() {
     const rec = h("div", { class: "vinyl" }); rec.innerHTML = Art.vinyl();
-    return section("playlist", "dark", h("p", { class: "script rv", text: "Our song" }),
+    return section("playlist", "", h("p", { class: "script rv", text: "Our song" }),
       h("div", { class: "player rv" }, h("div", { class: "cover" }, photo(W.hero.photo, W.hero.alt)),
         h("div", { class: "ctl" }, h("button", { type: "button", class: "pp", "aria-pressed": "false", "aria-label": "Play music" }),
           h("div", { class: "prog", role: "presentation" }, h("i")), h("span", { class: "tm cap", text: "0:00" }))),
@@ -168,7 +167,7 @@
         f.replaceWith(h("p", { class: "thanks", text: "Thank you, " + name }));
       } catch { msg.textContent = "Could not send. Check your connection and try again."; msg.classList.add("err"); btn.disabled = false; }
     });
-    const s = section("rsvp", "", ...head(W.rsvp.deadline, "", T.rsvpTitle), h("div", { class: "card reply-card rv" }, f, Art.corner("l"), Art.corner("r")));
+    const s = section("rsvp", "", ...head(W.rsvp.deadline, "", T.rsvpTitle), h("div", { class: "card reply-card rv" }, f));
     $("h2", s).id = "rsvp-t"; return s;
   }
 
@@ -204,9 +203,10 @@
   }
 
   function Closing() {
-    const s = section("closing", "dark", h("p", { class: "script rv", text: W.couple.monogram }), h("p", { class: "rv", id: "closing-t", text: T.closing }), rule(), quote(W.quotes.close),
-      h("p", { class: "meta rv", style: "margin-top:32px", text: W.couple.a + " & " + W.couple.b }));
-    return s;
+    return h("section", { id: "closing", "aria-labelledby": "closing-t" },
+      h("div", { class: "closing-art" }, h("div", { class: "win" }, h("p", { class: "script", text: W.couple.monogram }), h("p", { id: "closing-t", text: T.closing }))),
+      h("div", { class: "sec dark" }, h("div", { class: "wrap" }, quote(W.quotes.close),
+        h("p", { class: "meta rv", style: "margin-top:32px", text: W.couple.a + " & " + W.couple.b }))));
   }
 
   /* ---------- Opening, music, motion ---------- */
@@ -216,7 +216,7 @@
   $("#open-invite").textContent = W.couple.a + " & " + W.couple.b;
   $("#open-hint").textContent = T.openHint; $("#seal-mono").textContent = W.couple.monogram;
 
-  $("#main").append(Hero(), Countdown(), Story(), Events(), Gallery(), Playlist(), Rsvp(), Gift(), Registry(), Wishes(), Closing());
+  $("#main").append(Hero(), Playlist(), Countdown(), Story(), Events(), Gallery(), Rsvp(), Gift(), Registry(), Wishes(), Closing());
 
   const music = $("#music"); music.hidden = false; let audio = null;
   const all = s => document.querySelectorAll(s), fmt = t => Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0");
@@ -240,7 +240,7 @@
     setTimeout(() => { $("#opening").classList.add("gone"); document.body.classList.remove("locked"); scrollTo(0, 0); }, reduced ? 200 : 1900);
     setTimeout(() => $("#opening").setAttribute("hidden", ""), reduced ? 700 : 2900);
   });
-  ["story", "events", "gift", "closing"].forEach(id => $("#" + id).append(Art.corner("l"), Art.corner("r")));
+  ["events", "gift"].forEach(id => $("#" + id).append(Art.corner("l"), Art.corner("r")));
 
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
   document.querySelectorAll(".rv").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 80 + "ms"; io.observe(el); });
