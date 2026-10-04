@@ -542,22 +542,38 @@ body.locked .hero-deco .draw path{animation-play-state:paused}
 .guide .gnote{color:var(--forest)}
 
 /* ===== v12: stationery backgrounds (9-slice cards, section backdrops) ===== */
-#verse{background:linear-gradient(rgba(245,239,227,.42),rgba(245,239,227,.42)),url(../assets/art/bg-leaves.webp) center/cover}
-#couple{background:linear-gradient(rgba(245,239,227,.46),rgba(245,239,227,.46)),url(../assets/art/bg-lace-taupe.webp) center/cover}
-#playlist,#guide{background:linear-gradient(rgba(245,239,227,.6),rgba(245,239,227,.6)),url(../assets/art/bg-lace-green.webp) 0 0/400px auto}
 /* event + train cards become tickets */
 .ev.card,.ticket.card{background:none;box-shadow:none;border-style:solid;border-color:transparent;border-width:30px;border-image:url(../assets/art/frame-ticket.webp) 92 fill / 30px stretch;padding:4px 6px 8px}
 .ev.card::before,.ev.card::after,.ticket.card::before{display:none}
 .ev.card .meta,.ticket.card .meta{color:var(--ink-soft)}
-/* RSVP: green letter with sage wax seal */
-.reply-card{background:none;box-shadow:none;border-style:solid;border-color:transparent;border-width:84px 26px 48px;border-image:url(../assets/art/letter-green.webp) 175 52 100 52 fill / 84px 26px 48px stretch;
-  padding:4px 6px 0;max-width:440px;margin-inline:auto}
-.reply-card::before{display:none}.reply-card .vf{margin:14px -6px -34px}
-/* gift message: painted roses letter with wax seal */
-.letter-r{border-style:solid;border-color:transparent;border-width:112px 28px 66px;border-image:url(../assets/art/letter-roses.webp) 262 62 152 62 fill / 112px 28px 66px stretch;
-  max-width:420px;margin:24px auto 30px;padding:2px 8px 0;color:var(--ink);font:italic 17px/1.6 var(--f-disp);text-align:center}
-.letter-r p{margin:0;color:var(--ink)}
-/* closing statement on the lake painting */
-.lake{position:relative;aspect-ratio:675/1380;width:min(420px,100%);margin:0 auto 10px;background:url(../assets/art/lake-card.webp) center/100% 100% no-repeat}
-.lake-t{position:absolute;left:19.5%;right:19.5%;top:36.4%;height:20.6%;display:grid;place-items:center;text-align:center}
-.closing .lake .msg-c{color:var(--forest);font:italic clamp(11.5px,3.3vw,14.5px)/1.45 var(--f-disp);margin:0}
+/* ===== v13: calmer backgrounds, stronger type ===== */
+:root{--ink-soft:#463F33;--moss:#4D5838;--sage:#8B9871}
+#verse{background:linear-gradient(rgba(244,241,229,.9),rgba(244,241,229,.9)),url(../assets/art/bg-leaves.webp) center/cover}
+#couple{background:#EEE7D6}
+#playlist,#guide{background:linear-gradient(rgba(245,240,228,.92),rgba(245,240,228,.92)),url(../assets/art/bg-lace-green.webp) 0 0/400px auto}
+/* type: no thin faces, no hairline script on small text */
+h1{font-weight:400}h2,h3{font-weight:500}.count b{font-weight:400}.eyebrow{color:var(--forest);font-weight:700;font-size:13px}
+.quote,.gnote,.gteaser,.gextra,.cap{font-weight:500}.cap{color:var(--ink-soft)}.meta{color:var(--ink-soft);font-weight:500}
+.script{font-family:var(--f-disp);font-style:italic;font-weight:600;font-size:clamp(26px,7vw,34px);color:var(--forest);letter-spacing:.01em}
+.e-card .script,.e-to .script,.side-txt .script,.closing .joy,.thanks,.reply .mk{font-family:var(--f-script);font-style:normal;font-weight:400}
+.dark .script{color:var(--paper)}
+.verse .ar{color:var(--ink);font-size:clamp(25px,7vw,30px);line-height:2.1}.verse .tr{color:var(--ink);font-size:17.5px;line-height:1.65}.verse .ref{color:var(--forest)}
+/* envelope date */
+.e-card .e-date{color:var(--forest);font-weight:700;font-size:11.5px;letter-spacing:.2em;opacity:1}.e-card .eyebrow{color:var(--forest)}
+/* RSVP: ivory reply card on a moss mat, wax seal on top (no stretched images) */
+.reply-wrap{position:relative;max-width:440px;margin:34px auto 0;padding:14px;background:var(--moss) repeating-linear-gradient(0deg,rgba(0,0,0,.06) 0 1px,transparent 1px 3px);box-shadow:0 6px 18px rgba(40,40,20,.22)}
+.reply-wrap .reply-card{background:#FBF8F0 url(../assets/art/paper.webp) center/cover;border:0;border-image:none;box-shadow:none;margin:0;max-width:none;padding:54px 22px 0;overflow:hidden}
+.reply-wrap .rseal{position:absolute;left:50%;top:-30px;width:74px;margin-left:-37px;z-index:3}
+.reply-wrap .reply-card::before{display:none}.reply-card .vf{margin:14px -6px -34px}
+.reply .tick{color:var(--ink);font-weight:500}.reply .cap{color:var(--ink-soft)}.reply label.script{color:var(--forest)}
+/* Warmest wishes: painting mat + ivory card + wax seal */
+.letter-r{position:relative;max-width:440px;margin:26px auto 30px;padding:50px 18px 24px;background:#33402B url(../assets/art/roses-bg.webp) center/cover}
+.letter-r .lp{background:#FBF8F0 url(../assets/art/paper.webp) center/cover;padding:46px 24px 28px;box-shadow:0 4px 14px rgba(0,0,0,.28)}
+.letter-r .lp p{margin:0;color:var(--ink);font:italic 500 18px/1.65 var(--f-disp);text-align:center}
+.letter-r .seal-s{position:absolute;left:50%;top:18px;width:70px;margin-left:-35px;z-index:2}
+/* closing statement: quiet lace trim, no picture card */
+.cl-msg{max-width:440px;margin:0 auto}.cl-msg .lt{width:min(240px,70%);margin:0 auto 18px;opacity:.9}.cl-msg .lt.b{margin:18px auto 0;scale:1 -1}
+.closing .cl-msg .msg-c{color:var(--paper);font:italic 500 clamp(18px,5vw,21px)/1.7 var(--f-disp);margin:0}
+/* v13b: envelope text colour fix, quieter paper behind text */
+.opening.dark .env2 .script{color:var(--moss)}.opening.dark .env2 .eyebrow{color:var(--forest)}.opening.dark .env2 .e-date{color:var(--forest)}
+.card,.e-card,.reply-wrap .reply-card,.letter-r .lp{background-image:linear-gradient(rgba(251,248,240,.84),rgba(251,248,240,.84)),url(../assets/art/paper.webp);background-color:#FBF8F0;background-size:auto,cover;background-position:0 0,center}
