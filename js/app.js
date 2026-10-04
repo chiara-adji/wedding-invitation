@@ -273,7 +273,7 @@
       } catch { msg.textContent = U.errSend; msg.classList.add("err"); btn.disabled = false; }
     });
     const body = rsvpDone ? h("p", { class: "thanks", text: U.thanks + rsvpDone }) : f;
-    const s = section("rsvp", "", ...head(W.rsvp.deadline, "", T.rsvpTitle), h("div", { class: "card reply-card rv" }, body, art("vine-wrap", Art.vine())));
+    const s = section("rsvp", "", ...head(W.rsvp.deadline, "", T.rsvpTitle), h("div", { class: "reply-wrap rv" }, h("div", { class: "reply-card" }, body, art("vine-wrap", Art.vine())), Art.stick("seal", "rseal")));
     $("h2", s).id = "rsvp-t"; return s;
   }
 
@@ -287,7 +287,7 @@
       g.qr.src ? h("img", { class: "qr", src: g.qr.src, alt: g.qr.alt, loading: "lazy" }) : h("div", { class: "qr ph", text: U.qrPh }), h("p", { class: "cap", text: g.qr.caption })));
     if (G.addressText) cards.push(h("div", { class: "card rv" }, h("p", { class: "meta", text: U.sendGift }),
       h("p", { text: G.addressLabel }), h("p", { class: "cap", text: G.addressText }), h("button", { class: "link", type: "button", onclick: () => copy(G.addressText), text: U.copyAddr })));
-    const s = section("gift", "dark", ...head("", "", T.giftTitle), h("div", { class: "letter-r rv" }, h("p", { text: T.giftIntro })), h("div", { class: "cards" }, cards));
+    const s = section("gift", "dark", ...head("", "", T.giftTitle), h("div", { class: "letter-r rv" }, h("div", { class: "lp" }, h("p", { text: T.giftIntro })), Art.stick("seal", "seal-s")), h("div", { class: "cards" }, cards));
     $("h2", s).id = "gift-t"; return s;
   }
 
@@ -338,7 +338,7 @@
     const fam = (label, p) => h("div", { class: "fam rv" }, h("p", { class: "eyebrow", text: label }),
       h("p", { class: "pn", text: p.parents[0] }), h("p", { class: "pn", text: "& " + p.parents[1] }), h("p", { class: "addr", text: p.address }));
     return h("section", { id: "closing", class: "sec dark closing", "aria-labelledby": "closing-t" }, h("div", { class: "wrap" },
-      rule(), h("div", { class: "lake rv" }, h("div", { class: "lake-t" }, h("p", { id: "closing-t", class: "msg-c", text: T.closing }))), quote(D.quotes.close),
+      rule(), h("div", { class: "cl-msg rv" }, Art.stick("lace-trim", "lt"), h("p", { id: "closing-t", class: "msg-c", text: T.closing }), Art.stick("lace-trim", "lt b")), quote(D.quotes.close),
       h("p", { class: "script joy rv", text: U.joy }),
       fam(U.brideLbl, D.bride), h("p", { class: "fam-sep rv", "aria-hidden": "true", text: "&" }), fam(U.groomLbl, D.groom),
       art("scene-c rv", Art.px("elephant")), h("p", { class: "meta rv", text: D.dateLabel })));
