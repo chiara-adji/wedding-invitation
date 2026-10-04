@@ -393,3 +393,81 @@ body.locked .hero-deco .draw path{animation-play-state:paused}
 .verse .ar{font-family:"Amiri Quran","Amiri","Scheherazade New","Traditional Arabic",serif;font-size:clamp(25px,7.2vw,33px);line-height:2.35;color:var(--forest);margin:8px 0 22px;text-wrap:balance}
 .verse .tr{font:italic clamp(17px,4.8vw,19px)/1.7 var(--f-disp);color:var(--ink-soft);max-width:420px;margin:0 auto}
 .verse .ref{margin-top:22px}
+
+/* ===== v8: transparent keepsake artwork + motion ===== */
+.sx{display:block;max-width:none;height:auto;-webkit-user-drag:none;user-select:none}
+.dk{position:absolute;pointer-events:none;z-index:0;transform-origin:50% 100%}
+.wrap{position:relative;z-index:2}
+.p-tr{top:-6px;right:-12px}.p-tl{top:-6px;left:-12px}.p-bl{bottom:-8px;left:-12px}.p-br{bottom:-8px;right:-12px}
+.w1{width:64px}.w2{width:clamp(88px,25vw,140px)}.w3{width:clamp(108px,31vw,190px)}.w4{width:clamp(140px,40vw,240px)}
+.flip{scale:-1 1}.rot1{rotate:-9deg}.rot2{rotate:8deg}
+@keyframes float{from{transform:translateY(0)}to{transform:translateY(-9px)}}
+@keyframes float2{from{transform:translateY(6px) rotate(-1.5deg)}to{transform:translateY(-6px) rotate(1.5deg)}}
+@keyframes swayb{from{transform:rotate(-2.2deg)}to{transform:rotate(2.2deg)}}
+@keyframes swing{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+@keyframes fly{0%{transform:translate(0,0) rotate(0)}30%{transform:translate(8px,-7px) rotate(2deg)}60%{transform:translate(-4px,-12px) rotate(-1deg)}100%{transform:translate(0,0) rotate(0)}}
+.float{animation:float 5s ease-in-out infinite alternate}.float2{animation:float2 6.5s ease-in-out infinite alternate}
+.sway{animation:swayb 6s ease-in-out infinite alternate}.swing{transform-origin:50% 0;animation:swing 4.2s ease-in-out infinite alternate}
+.fly{transform-origin:50% 50%;animation:fly 7s ease-in-out infinite}
+.pj{transform-origin:50% 0;animation:sway 7s ease-in-out infinite alternate}.pj.r{transform:none;scale:-1 1}
+.pj,.corner{height:auto}.corner{opacity:.9;animation:swayb 7s ease-in-out infinite alternate}.corner.r{transform:none;scale:-1 1}
+.card{background:#FBF8F0 url(../assets/art/paper.webp) center/cover}
+.hero{background:#F3ECDD url(../assets/art/paper.webp) center/cover}
+/* opening */
+.opening.dark{background:#3A4430 url(../assets/art/roses-bg.webp) center/cover}
+.opening::before{content:"";position:absolute;inset:0;background:rgba(48,58,38,.58);z-index:0}
+.deco{z-index:1}.deco .dk{position:absolute}
+.deco .d1{left:-5%;bottom:9%;width:clamp(120px,34vw,200px)}.deco .d2{right:-5%;bottom:7%;width:clamp(110px,31vw,190px)}
+.deco .d3{left:7%;top:31%;width:72px}.deco .d4{right:5%;top:27%;width:clamp(90px,25vw,140px)}
+.deco .pj{opacity:1}
+.flap{background:none;clip-path:none;transform-style:preserve-3d}
+.flap i{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 100%);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flap .ff{background:#EFE7D4}
+.flap .fb{transform:rotateX(180deg);background:#DDD5BF url(../assets/art/env-liner.webp) 50% 82%/128% auto no-repeat}
+.seal{width:78px;height:78px;margin:-39px 0 0 -39px;background:none;box-shadow:none;border-radius:0;padding:0}
+.seal:hover{background:none;filter:brightness(1.08)}
+.seal img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}
+.seal span{position:absolute;left:-9999px}
+.env-tag{position:absolute;right:-6px;bottom:-16px;width:76px;z-index:5;pointer-events:none;transform-origin:20% 0;animation:swing 4s ease-in-out infinite alternate}
+.opened .env-tag{opacity:0;transition:opacity .4s}
+/* hero */
+.hero-deco .pj{width:clamp(150px,44vw,260px)}
+.hero-deco .bt{width:min(520px,96%);bottom:-4px}.bt img,.scene-c img,.side-bt img{width:100%}
+.hero-deco .dk{position:absolute}
+.hero-deco .d1{left:-7%;bottom:8%;width:clamp(120px,34vw,210px)}.hero-deco .d2{right:-7%;bottom:10%;width:clamp(110px,31vw,200px)}
+.hero-deco .d3{right:3%;top:15%;width:clamp(58px,17vw,96px)}
+/* story banner + events lanterns + rsvp flowers */
+.story-art{position:relative;width:min(300px,78vw);margin:0 auto 44px}.story-art .liner{width:100%}
+.story-art .hm{position:absolute;right:-26px;top:16%;width:92px}.story-art .lv{position:absolute;left:-16px;bottom:-8px;width:74px;transform-origin:bottom}
+.way-art{position:relative;width:min(380px,92vw);margin:0 auto 24px;min-height:120px}
+.way-art .joglo-img{width:68%;margin:0 auto}.way-art .lt{position:absolute;top:-6px;width:24%}.way-art .lt.l{left:0}.way-art .lt.r{right:0;scale:-1 1}
+.map-btn{margin:22px auto 0;display:inline-flex}
+.reply-card{background:#FBF8F0 url(../assets/art/paper.webp) center/cover;padding-bottom:36px}
+.vf{position:relative;height:130px;margin:14px -28px -36px;pointer-events:none}
+.vf .sx{position:absolute;bottom:-4px;transform-origin:50% 100%}.vf .a{left:-1%;width:25%}.vf .b{left:41%;width:21%}.vf .c{right:-1%;width:29%}
+.vf .b{bottom:-4px}.vf .c{animation-delay:-2s}
+/* chapter stickers sit in the card corner */
+.chap{overflow:visible}.chap .p-tr{top:-34px;right:-22px;width:84px}
+/* music: heart vinyl + song list */
+.vinyl-img{width:100%;display:block}.vinyl.spin .vinyl-img{animation:spin 9s linear infinite}
+.songs-h{margin:28px 0 10px;color:var(--moss)}
+.songs{list-style:none;padding:0;margin:0 auto;max-width:340px;display:grid;gap:8px;text-align:left}
+.sg{width:100%;display:flex;align-items:center;gap:14px;padding:10px 16px;border:1px solid var(--linen);background:#FBF8F0;border-radius:12px;cursor:pointer;font:inherit;color:var(--ink);text-align:left;transition:border-color .25s,background .25s}
+.sg:hover{border-color:var(--sage)}.sg .n{font:italic 24px/1 var(--f-disp);color:var(--sage);width:24px;flex:none}
+.sg .tt{display:grid;min-width:0}.sg b{font:500 19px/1.2 var(--f-disp);color:var(--forest)}.sg i{font-size:14px;color:var(--ink-soft)}
+.sg.cur{border-color:var(--moss);background:#fff}.sg.cur .n{color:var(--claret)}
+.sg.on b::after{content:" ♪";color:var(--claret);animation:float 1.2s ease-in-out infinite alternate;display:inline-block}
+/* closing cartouche */
+.cart{width:min(380px,92vw);aspect-ratio:479/640;margin:0 auto 8px;display:grid;place-items:center;padding:19% 17%;
+  background:url(../assets/art/cartouche.webp) center/100% 100% no-repeat}
+.closing .cart .msg-c{color:var(--forest);font-size:clamp(13px,3.7vw,16px);line-height:1.5;margin:0}
+.closing .quote{margin-top:44px}
+@media(prefers-reduced-motion:reduce){.float,.float2,.sway,.swing,.fly,.pj,.corner,.env-tag,.vinyl.spin .vinyl-img,.seal{animation:none!important}}
+/* v8 fixes */
+.flap .fb{clip-path:polygon(0 100%,100% 100%,50% 0);background-position:50% 58%}
+.hero-deco .pj{width:clamp(240px,68vw,400px)}.hero-deco .pj.l{left:-15%}.hero-deco .pj.r{right:-15%}
+.deco .pj{width:clamp(200px,58vw,320px)}.deco .pj.l{left:-13%;top:6px}.deco .pj.r{right:-13%;left:auto;top:6px}
+.deco .d3{left:3%;top:15%}.deco .d4{right:3%;top:17%}
+.canopy .pj{width:46%}.canopy .pj.l{left:-6%}.canopy .pj.r{right:-6%}
+@media(min-width:1024px){.side-top .pj{width:clamp(200px,24vw,360px)}}
+.dark .map-btn{color:var(--ivory);border-color:rgba(245,239,227,.7)}.dark .map-btn:hover{background:var(--ivory);color:var(--forest)}
