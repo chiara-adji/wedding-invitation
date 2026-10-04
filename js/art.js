@@ -104,12 +104,12 @@ window.Art = (() => {
     penjor: side => px("janur", "pj " + side),
     fronds: () => "",
     scene: () => px("joglo", "joglo-img"),
-    way: () => px("lanterns", "lt l swing") + px("lanterns", "lt r swing") + px("joglo", "joglo-img"),
+    way: () => px("fan-batik2", "fn l sway") + px("gunungan", "gn float") + px("fan-batik2", "fn r sway"),
     archScene: () => px("env-liner", "liner") + px("hummer", "hm fly") + px("lov", "lv sway"),
     vine: () => `<div class="vf">${px("lily-pink", "a sway")}${px("lov", "b sway")}${px("lily-white", "c sway")}</div>`,
     vinyl: () => px("vinyl", "vinyl-img"),
-    backdrop: () => px("janur", "pj l") + px("janur", "pj r") + px("lily-white", "dk d1 float") + px("lily-pink", "dk d2 float2") + px("hummer", "dk d3 fly") + px("dove", "dk d4 float2"),
+    backdrop: () => px("lily-white", "dk d1 float") + px("lily-pink", "dk d2 float2") + px("hummer", "dk d3 fly") + px("dove", "dk d4 float2"),
     heroDeco: () => px("janur", "pj l") + px("janur", "pj r") + px("lily-white", "dk d1 float") + px("lily-pink", "dk d2 float2") + px("hummer", "dk d3 fly") + `<div class="bt">${px("joglo", "joglo-img")}</div>`
   };
-  return { ...{ scene, way, archScene, corner, divider, lace, vinyl, vine, penjor, fronds, backdrop, heroDeco }, ...N, stick, px };
+  return { ...{ scene, way, archScene, corner, divider, lace, vinyl, vine, penjor, fronds, backdrop, heroDeco }, ...N, stick, px, holes: {"frame-flowers": {"l": 16.2, "t": 16.4, "w": 66.2, "h": 71.5, "ar": 0.8224}, "frame-oval": {"l": 15.1, "t": 12.9, "w": 69.1, "h": 74.4, "ar": 0.822}} };
 })();

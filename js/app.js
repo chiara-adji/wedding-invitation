@@ -39,6 +39,10 @@
     img.src = cand[0]; return img;
   }
   const toast = msg => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1800); };
+  const lace = () => { const d = h("div", { class: "lace-rule rv", "aria-hidden": "true" }); d.append(Art.stick("lace-trim")); return d; };
+  const framed = (name, ph, cls = "") => { const H = Art.holes[name];
+    return h("div", { class: "frm " + cls, style: `aspect-ratio:${H.ar}` },
+      h("div", { class: "frm-ph", style: `left:${H.l - 1}%;top:${H.t - 1}%;width:${H.w + 2}%;height:${H.h + 2}%` }, ph), Art.stick(name, "frm-img")); };
   const rule = () => { const d = h("div", { class: "divider rv" }); d.innerHTML = Art.divider(); return d; };
   const head = (eyebrow, whisper, title) => [
     h("p", { class: "eyebrow rv", text: eyebrow }),
@@ -74,16 +78,24 @@
     const tr = tracks[ti];
     if (tr) { all(".np-t").forEach(e => e.textContent = tr.title); all(".np-a").forEach(e => e.textContent = tr.artist); }
   }
-  const play = () => audio && audio.play().catch(() => toast(U.tapAgain));
+  let wantPlay = false;
+  const setLoading = on => all("#music,.pp").forEach(b => b.classList.toggle("loading", on));
+  const play = () => { if (!audio) return; wantPlay = true; setLoading(audio.readyState < 3);
+    audio.play().catch(() => { setLoading(false); toast(U.tapAgain); }); };
   function load(n) {
     if (!audio) return; ti = (n + tracks.length) % tracks.length;
     audio.src = encodeURI(tracks[ti].src); all(".prog i").forEach(i => i.style.width = "0"); all(".tm").forEach(t => t.textContent = "0:00"); syncAudio();
   }
   function go(d) { if (!audio) return; if (d < 0 && audio.currentTime > 3) { audio.currentTime = 0; return; } load(ti + d); play(); }
-  const toggle = () => { if (!audio) return toast(U.musicMissing); audio.paused ? play() : audio.pause(); };
+  const toggle = () => { if (!audio) return toast(U.musicMissing); audio.paused ? play() : (wantPlay = false, setLoading(false), audio.pause()); };
   if (tracks.length) {
     audio = new Audio(); audio.preload = "auto";
     audio.addEventListener("play", syncAudio); audio.addEventListener("pause", syncAudio);
+    ["playing", "canplay"].forEach(ev => audio.addEventListener(ev, () => { if (!audio.paused) setLoading(false); }));
+    ["waiting", "stalled"].forEach(ev => audio.addEventListener(ev, () => { if (wantPlay && !audio.paused) setLoading(true); }));
+    // phones can delay or refuse the first start (slow signal, a call in progress): retry on the next touch
+    const retry = () => { if (wantPlay && audio.paused) audio.play().catch(() => {}); else if (!audio.paused) { removeEventListener("touchend", retry); removeEventListener("click", retry); } };
+    addEventListener("touchend", retry, { passive: true }); addEventListener("click", retry);
     audio.addEventListener("ended", () => go(1));
     audio.addEventListener("error", () => toast(U.musicMissing));
     audio.addEventListener("timeupdate", () => { const p = audio.duration ? audio.currentTime / audio.duration : 0;
@@ -102,7 +114,7 @@
 
   function Verse() {
     const v = D.verse, s = h("section", { id: "verse", class: "sec verse", "aria-label": v.ref }, h("div", { class: "wrap" },
-      rule(), h("p", { class: "ar rv", lang: "ar", dir: "rtl", text: W.ayat }),
+      lace(), h("p", { class: "ar rv", lang: "ar", dir: "rtl", text: W.ayat }),
       h("p", { class: "tr rv", text: v.text }), h("p", { class: "eyebrow ref rv", text: v.ref })));
     s.append(Art.corner("l"), Art.corner("r")); return s;
   }
@@ -122,8 +134,7 @@
     const s = section("countdown", "dark", ...head(T.countdownTitle, "", ""));
     const box = h("div", { class: "count rv", role: "timer", "aria-label": U.timer });
     const cells = U.units.map(l => { const b = h("b", { text: "0" }); box.append(h("div", {}, b, h("span", { text: l }))); return b; });
-    const frame = h("div", { class: "lace-frame rv" }); frame.innerHTML = Art.lace();
-    frame.append(h("div", { class: "oval" }, photo(W.hero.photo, D.heroAlt)));
+    const frame = framed("frame-flowers", photo(W.hero.photo, D.heroAlt), "cd-frm rv");
     $(".wrap", s).append(frame, quote(D.quotes.hero), box);
     $(".eyebrow", s).id = "countdown-t";
     const target = new Date(W.date).getTime();
@@ -143,7 +154,7 @@
         c.date ? h("p", { class: "meta", text: c.date }) : null, h("h3", { text: c.title }),
         base.photo ? h("figure", { class: "pol-s chap-ph" }, photo(base.photo, c.title)) : null,
         h("p", { class: "dc", text: c.text }), Art.corner("l"), Art.corner("r"), Art.stick(["hummer", "dove", "rings"][i % 3], "dk p-tr w2 float")); }));
-    const s = section("story", "", art("story-art rv", Art.archScene()), ...head("", "", T.storyTitle), chaps, quote(D.quotes.story));
+    const s = section("story", "", framed("frame-oval", photo(W.gallery[0].src, D.galleryAlts[0]), "story-frm rv"), ...head("", "", T.storyTitle), chaps, quote(D.quotes.story));
     $("h2", s).id = "story-t"; return s;
   }
 
@@ -163,7 +174,7 @@
     const grid = h("div", { class: "grid rv" }, W.gallery.map((p, i) => { const alt = D.galleryAlts[i] || "";
       return h("button", { type: "button", "aria-label": U.openPhoto + alt, onclick: () => LB.open(i) },
         p.src ? photo(p.src, alt, p) : h("div", { class: "ph", text: alt })); }));
-    const s = section("gallery", "", art("canopy", Art.penjor("l") + Art.penjor("r")), ...head("", "", T.galleryTitle), grid, T.galleryCaption ? h("p", { class: "quote rv", text: T.galleryCaption }) : null);
+    const s = section("gallery", "", art("canopy", Art.px("lily-bouquet", "cb l sway") + Art.px("lily-bouquet", "cb r sway")), ...head("", "", T.galleryTitle), grid, T.galleryCaption ? h("p", { class: "quote rv", text: T.galleryCaption }) : null);
     $("h2", s).id = "gallery-t"; return s;
   }
 
@@ -192,8 +203,9 @@
     return section("playlist", "", h("p", { id: "playlist-t", class: "script rv", text: T.songsTitle }),
       h("div", { class: "player rv" }, h("div", { class: "cover" }, photo(W.hero.photo, D.heroAlt)),
         h("div", { class: "ctl" }, h("div", { class: "btns" }, skip("bk", ICON_PREV, -1), pp, skip("nx", ICON_NEXT, 1)),
-          prog, h("span", { class: "tm cap", text: "0:00" }))),
-      rec, h("h3", { class: "np-t rv" }), h("p", { class: "np-a meta rv" }),
+          prog, h("span", { class: "tm cap", text: "0:00" }),
+          h("div", { class: "np-in" }, h("b", { class: "np-t" }), h("i", { class: "np-a" })))),
+      rec,
       h("p", { class: "songs-h eyebrow rv", text: U.songsHint }),
       h("ol", { class: "songs rv" }, tracks.map((t, i) => h("li", {}, h("button", { type: "button", class: "sg", "data-i": i, onclick: () => { load(i); play(); } },
         h("span", { class: "n", text: i + 1 }), h("span", { class: "tt" }, h("b", { text: t.title }), h("i", { text: t.artist })))))));
@@ -273,6 +285,20 @@
     $("h2", s).id = "registry-t"; return s;
   }
 
+  function CityGuide() {
+    const C = D.guide, mapq = n => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(/cepu/i.test(n) ? n : n + " Cepu");
+    const place = p => h("div", { class: "card gplace rv" }, h("h3", { text: p.name }), h("p", { text: p.text }),
+      p.extra ? h("p", { class: "gextra", text: p.extra }) : null, h("a", { class: "link gmap", href: mapq(p.name), target: "_blank", rel: "noopener", text: U.openMap }));
+    const ticket = r => h("div", { class: "card ticket rv" }, h("p", { class: "meta", text: r.from }), h("h3", { text: r.train }),
+      h("div", { class: "tk" }, h("div", {}, h("small", { text: U.dep }), h("b", { text: r.dep })), h("span", { class: "arr", "aria-hidden": "true", text: "→" }),
+        h("div", {}, h("small", { text: U.arr }), h("b", { text: r.arr }))), r.note ? h("p", { class: "cap", text: r.note }) : null);
+    const grp = (title, ...kids) => h("div", { class: "ggroup" }, h("p", { class: "eyebrow rv", text: title }), ...kids);
+    const ttl = h("div", { class: "gtitle rv" }, Art.stick("banner"), h("h2", { id: "guide-t", text: C.title }));
+    return section("guide", "guide", ttl, h("p", { class: "gnote rv", text: C.note }),
+      grp(C.aboutTitle, h("p", { class: "gtxt rv", text: C.about })), grp(C.stayTitle, C.stays.map(place)), grp(C.eatTitle, C.eats.map(place)),
+      grp(C.trainTitle, h("p", { class: "gsub rv", text: C.trainSub }), h("p", { class: "gtxt rv", text: C.trainIntro }), C.routes.map(ticket), h("p", { class: "cap gret rv", text: C.returnNote })));
+  }
+
   let wishData = null;
   function Wishes() {
     const list = h("div", { class: "wishes", "aria-live": "polite" });
@@ -292,23 +318,23 @@
       rule(), h("div", { class: "cart rv" }, h("p", { id: "closing-t", class: "msg-c", text: T.closing })), quote(D.quotes.close),
       h("p", { class: "script joy rv", text: U.joy }),
       fam(U.brideLbl, D.bride), h("p", { class: "fam-sep rv", "aria-hidden": "true", text: "&" }), fam(U.groomLbl, D.groom),
-      art("scene-c rv", Art.scene()), h("p", { class: "meta rv", text: D.dateLabel })));
+      art("scene-c rv", Art.px("elephant")), h("p", { class: "meta rv", text: D.dateLabel })));
   }
 
   /* ---------- Page assembly ---------- */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
   function render(st, instant) {
     clearInterval(cdTimer);
-    $("#main").replaceChildren(Hero(), Verse(), Couple(), Playlist(), Countdown(), Story(), Events(), Gallery(), Rsvp(st), Gift(), Registry(), Wishes(), Closing());
+    $("#main").replaceChildren(Hero(), Verse(), Couple(), Playlist(), Countdown(), Story(), Events(), Gallery(), Rsvp(st), Gift(), Registry(), Wishes(), CityGuide(), Closing());
     ["events", "gift"].forEach(id => $("#" + id).append(Art.corner("l"), Art.corner("r")));
     all("#main .rv").forEach((el, i) => { if (instant) el.classList.add("in"); else { el.style.transitionDelay = (i % 4) * 80 + "ms"; io.observe(el); } });
     const DECO = {
       verse: [["stamp-flower", "p-tr w2 rot2 float"], ["hummer", "p-bl w2 fly"]], couple: [["dove", "p-tr w3 float"], ["stamp-bird", "p-bl w2 rot1 float2"]],
-      playlist: [["lanterns", "p-tl w2 swing"], ["hummer", "p-br w2 fly"]], countdown: [["lanterns", "p-tl w2 swing"], ["lanterns", "p-tr w2 swing flip"], ["lace-fan", "p-br w3 float"]],
-      story: [["lily-white", "p-tr w3 sway"], ["stamp-tulip", "p-bl w2 rot1 float"]], events: [["candi", "p-tr w3 float"], ["stamp-bird", "p-bl w2 rot2 float2"]],
-      gallery: [["stamp-flower", "p-tl w2 rot1 float"], ["key", "p-br w2 rot2 float2"]], rsvp: [["seal", "p-tr w2 rot2 float"], ["tag", "p-tl w2 rot1 swing"]],
-      gift: [["locket", "p-tr w1 float"], ["rings", "p-bl w2 rot1 float2"]], registry: [["gold-flora", "p-tr w2 sway"], ["key", "p-bl w2 rot1 float"]],
-      wishes: [["dove", "p-tl w3 float"], ["lov", "p-br w2 sway"]], closing: [["lily-white", "p-bl w4 sway"], ["lily-pink", "p-br w4 sway flip"], ["fan-batik", "p-tr w3 float"]]
+      playlist: [["rosette", "p-tl w2 float"], ["fan-batik2", "p-br w2 rot2 float2"]], countdown: [["lamp", "p-tl w2 swing"], ["lamp", "p-tr w2 swing flip"], ["lace-fan", "p-br w3 float"]],
+      story: [["lily-white", "p-tr w3 sway"], ["stamp-tulip", "p-bl w2 rot1 float"]], events: [["parasol", "p-tr w3 rot2 sway"], ["stamp-bird", "p-bl w2 rot2 float2"]],
+      gallery: [["stamp-flower", "p-tl w2 rot1 float"], ["key", "p-br w2 rot2 float2"]], rsvp: [["butterfly", "p-tr w2 fly"], ["tag", "p-tl w2 rot1 swing"]],
+      gift: [["locket", "p-tr w1 float"], ["rings", "p-bl w2 rot1 float2"]], registry: [["parasol", "p-tr w2 rot1 sway"], ["gold-flora", "p-bl w2 rot1 float"]],
+      guide: [["tampah", "p-tr w2 rot2 float"], ["rosette", "p-bl w2 sway"]], wishes: [["dove", "p-tl w3 float"], ["lov", "p-br w2 sway"]], closing: [["lily-white", "p-bl w4 sway"], ["lily-pink", "p-br w4 sway flip"], ["fan-batik2", "p-tr w3 float"]]
     };
     Object.entries(DECO).forEach(([id, l]) => { const s = $("#" + id); if (s) l.forEach(([n, c]) => s.append(Art.stick(n, "dk " + c))); });
     syncAudio();
@@ -322,12 +348,12 @@
     document.documentElement.lang = lang; document.title = D.seoTitle;
     $("#open-wo").textContent = T.weddingOf; $("#open-invite").textContent = W.couple.a + " & " + W.couple.b;
     $("#open-to").textContent = T.dear; $("#open-guest").textContent = guest || T.fallbackGuest;
-    $("#open-hint").textContent = T.openHint; $("#seal-mono").textContent = W.couple.monogram;
+    $("#open-hint").textContent = T.openHint; $("#open-date").textContent = D.dateLabel; $("#seal-mono").textContent = W.couple.monogram;
     $("#seal").setAttribute("aria-label", U.openInvite); $(".skip").textContent = U.skip;
     all(".langsw button").forEach(b => { const on = b.dataset.l === lang; b.setAttribute("aria-pressed", on); if (on) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
-    $(".side-in").replaceChildren(art("side-top", Art.penjor("l") + Art.penjor("r")),
+    $(".side-in").replaceChildren(art("side-top", Art.px("parasol", "sp sp1 sway") + Art.px("rosette", "sp sp2 float") + Art.px("butterfly", "sp sp3 fly")),
       h("div", { class: "side-txt" }, h("p", { class: "eyebrow", text: T.weddingOf }), h("p", { class: "script", text: W.couple.a + " & " + W.couple.b }), h("p", { class: "meta", text: D.dateLabel })),
-      art("side-bt", Art.scene()));
+      art("side-bt", Art.px("lily-bouquet", "sb a sway") + Art.px("fan-batik2", "sb b float") + Art.px("lily-white", "sb c sway")));
   }
   function setLang(l) {
     if (l === lang || !W.i18n[l]) return;
@@ -345,7 +371,7 @@
   const music = $("#music"); music.hidden = false; music.onclick = toggle;
   $("#seal").addEventListener("click", () => {
     $("#envelope").classList.add("opened"); $("#seal").disabled = true;
-    if (audio) audio.play().catch(() => {}); // runs from a tap, so browsers allow it
+    if (audio) { play(); setTimeout(() => { if (audio.paused || audio.readyState < 3) toast(U.musicLoading); }, 3500); } // starts from a tap, so browsers allow it
     setTimeout(() => { $("#opening").classList.add("gone"); document.body.classList.remove("locked"); scrollTo(0, 0); }, reduced ? 200 : 1900);
     setTimeout(() => $("#opening").setAttribute("hidden", ""), reduced ? 700 : 2900);
   });
