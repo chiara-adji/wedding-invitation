@@ -40,9 +40,23 @@
   }
   const toast = msg => { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1800); };
   const lace = () => { const d = h("div", { class: "lace-rule rv", "aria-hidden": "true" }); d.append(Art.stick("lace-trim")); return d; };
-  const framed = (name, ph, cls = "") => { const H = Art.holes[name];
-    return h("div", { class: "frm " + cls, style: `aspect-ratio:${H.ar}` },
-      h("div", { class: "frm-ph", style: `left:${H.l - 1}%;top:${H.t - 1}%;width:${H.w + 2}%;height:${H.h + 2}%` }, ph), Art.stick(name, "frm-img")); };
+  // Photo frame: finds the hole in the frame image by itself, so any frame file lines up with its photo
+  const framed = (name, ph, cls = "") => {
+    const F = Art.holes[name], box = h("div", { class: "frm " + cls, style: `aspect-ratio:${F.ar}` }), pb = h("div", { class: "frm-ph" }, ph), img = Art.stick(name, "frm-img");
+    const put = (l, t, w, hh) => Object.assign(pb.style, { left: l + "%", top: t + "%", width: w + "%", height: hh + "%" });
+    put(F.l - 1, F.t - 1, F.w + 2, F.h + 2);
+    const fit = () => { try {
+      const W0 = img.naturalWidth, H0 = img.naturalHeight; if (!W0) return; box.style.aspectRatio = W0 + "/" + H0;
+      const s = Math.min(1, 180 / W0), w = Math.round(W0 * s), hh = Math.round(H0 * s), c = document.createElement("canvas"); c.width = w; c.height = hh;
+      const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(img, 0, 0, w, hh);
+      const d = x.getImageData(0, 0, w, hh).data, seen = new Uint8Array(w * hh), st = [(hh >> 1) * w + (w >> 1)], open = i => d[i * 4 + 3] < 40;
+      if (!open(st[0])) return; seen[st[0]] = 1; let x0 = w, y0 = hh, x1 = 0, y1 = 0;
+      while (st.length) { const i = st.pop(), px = i % w, py = (i / w) | 0; x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py);
+        [[px > 0, i - 1], [px < w - 1, i + 1], [py > 0, i - w], [py < hh - 1, i + w]].forEach(([ok, j]) => { if (ok && !seen[j] && open(j)) { seen[j] = 1; st.push(j); } }); }
+      put(x0 / w * 100 - .5, y0 / hh * 100 - .5, (x1 - x0 + 1) / w * 100 + 1, (y1 - y0 + 1) / hh * 100 + 1);
+    } catch (e) { /* keep the stored measurements */ } };
+    img.complete && img.naturalWidth ? fit() : img.addEventListener("load", fit);
+    box.append(pb, img); return box; };
   const rule = () => { const d = h("div", { class: "divider rv" }); d.innerHTML = Art.divider(); return d; };
   const head = (eyebrow, whisper, title) => [
     h("p", { class: "eyebrow rv", text: eyebrow }),
@@ -134,7 +148,7 @@
     const s = section("countdown", "dark", ...head(T.countdownTitle, "", ""));
     const box = h("div", { class: "count rv", role: "timer", "aria-label": U.timer });
     const cells = U.units.map(l => { const b = h("b", { text: "0" }); box.append(h("div", {}, b, h("span", { text: l }))); return b; });
-    const frame = framed("frame-flowers", photo(W.hero.photo, D.heroAlt), "cd-frm rv");
+    const frame = framed("frame-flowers2", photo(W.hero.photo, D.heroAlt), "cd-frm rv");
     $(".wrap", s).append(frame, quote(D.quotes.hero), box);
     $(".eyebrow", s).id = "countdown-t";
     const target = new Date(W.date).getTime();
@@ -273,7 +287,7 @@
       g.qr.src ? h("img", { class: "qr", src: g.qr.src, alt: g.qr.alt, loading: "lazy" }) : h("div", { class: "qr ph", text: U.qrPh }), h("p", { class: "cap", text: g.qr.caption })));
     if (G.addressText) cards.push(h("div", { class: "card rv" }, h("p", { class: "meta", text: U.sendGift }),
       h("p", { text: G.addressLabel }), h("p", { class: "cap", text: G.addressText }), h("button", { class: "link", type: "button", onclick: () => copy(G.addressText), text: U.copyAddr })));
-    const s = section("gift", "dark", ...head("", "", T.giftTitle), h("p", { class: "rv", text: T.giftIntro }), h("div", { class: "cards" }, cards));
+    const s = section("gift", "dark", ...head("", "", T.giftTitle), h("div", { class: "letter-r rv" }, h("p", { text: T.giftIntro })), h("div", { class: "cards" }, cards));
     $("h2", s).id = "gift-t"; return s;
   }
 
@@ -285,18 +299,27 @@
     $("h2", s).id = "registry-t"; return s;
   }
 
+  let guideOpen = false;
   function CityGuide() {
-    const C = D.guide, mapq = n => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(/cepu/i.test(n) ? n : n + " Cepu");
+    const C = D.guide, mapq = p => p.url || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(/cepu/i.test(p.name) ? p.name : p.name + " Cepu");
     const place = p => h("div", { class: "card gplace rv" }, h("h3", { text: p.name }), h("p", { text: p.text }),
-      p.extra ? h("p", { class: "gextra", text: p.extra }) : null, h("a", { class: "link gmap", href: mapq(p.name), target: "_blank", rel: "noopener", text: U.openMap }));
+      p.extra ? h("p", { class: "gextra", text: p.extra }) : null, h("a", { class: "link gmap", href: mapq(p), target: "_blank", rel: "noopener", text: U.openMap }));
     const ticket = r => h("div", { class: "card ticket rv" }, h("p", { class: "meta", text: r.from }), h("h3", { text: r.train }),
       h("div", { class: "tk" }, h("div", {}, h("small", { text: U.dep }), h("b", { text: r.dep })), h("span", { class: "arr", "aria-hidden": "true", text: "→" }),
         h("div", {}, h("small", { text: U.arr }), h("b", { text: r.arr }))), r.note ? h("p", { class: "cap", text: r.note }) : null);
-    const grp = (title, ...kids) => h("div", { class: "ggroup" }, h("p", { class: "eyebrow rv", text: title }), ...kids);
+    const grp = (title, ...kids) => h("div", { class: "ggroup" }, h("p", { class: "eyebrow", text: title }), ...kids);
     const ttl = h("div", { class: "gtitle rv" }, Art.stick("banner"), h("h2", { id: "guide-t", text: C.title }));
-    return section("guide", "guide", ttl, h("p", { class: "gnote rv", text: C.note }),
-      grp(C.aboutTitle, h("p", { class: "gtxt rv", text: C.about })), grp(C.stayTitle, C.stays.map(place)), grp(C.eatTitle, C.eats.map(place)),
-      grp(C.trainTitle, h("p", { class: "gsub rv", text: C.trainSub }), h("p", { class: "gtxt rv", text: C.trainIntro }), C.routes.map(ticket), h("p", { class: "cap gret rv", text: C.returnNote })));
+    const mk = cls => h("button", { type: "button", class: "btn ghost gtoggle " + cls, "aria-expanded": String(guideOpen), "aria-controls": "guide-body" });
+    const top = mk("top"), bot = mk("bot");
+    const body = h("div", { class: "gbody", id: "guide-body" }, h("div", { class: "gin" }, h("p", { class: "gnote", text: C.note }),
+      grp(C.aboutTitle, h("p", { class: "gtxt", text: C.about })), grp(C.stayTitle, C.stays.map(place)), grp(C.eatTitle, C.eats.map(place)),
+      grp(C.trainTitle, h("p", { class: "gsub", text: C.trainSub }), h("p", { class: "gtxt", text: C.trainIntro }), C.routes.map(ticket), h("p", { class: "cap gret", text: C.returnNote })),
+      h("div", { class: "gend" }, bot)));
+    const s = section("guide", "guide" + (guideOpen ? " open" : ""), ttl, h("p", { class: "gteaser rv", text: C.teaser }), top, body);
+    const paint = () => { s.classList.toggle("open", guideOpen); body.inert = !guideOpen;
+      [top, bot].forEach(b => { b.setAttribute("aria-expanded", String(guideOpen)); b.textContent = guideOpen ? C.close : C.open; }); };
+    const flip = () => { guideOpen = !guideOpen; paint(); if (!guideOpen) s.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" }); };
+    top.onclick = bot.onclick = flip; paint(); return s;
   }
 
   let wishData = null;
@@ -315,7 +338,7 @@
     const fam = (label, p) => h("div", { class: "fam rv" }, h("p", { class: "eyebrow", text: label }),
       h("p", { class: "pn", text: p.parents[0] }), h("p", { class: "pn", text: "& " + p.parents[1] }), h("p", { class: "addr", text: p.address }));
     return h("section", { id: "closing", class: "sec dark closing", "aria-labelledby": "closing-t" }, h("div", { class: "wrap" },
-      rule(), h("div", { class: "cart rv" }, h("p", { id: "closing-t", class: "msg-c", text: T.closing })), quote(D.quotes.close),
+      rule(), h("div", { class: "lake rv" }, h("div", { class: "lake-t" }, h("p", { id: "closing-t", class: "msg-c", text: T.closing }))), quote(D.quotes.close),
       h("p", { class: "script joy rv", text: U.joy }),
       fam(U.brideLbl, D.bride), h("p", { class: "fam-sep rv", "aria-hidden": "true", text: "&" }), fam(U.groomLbl, D.groom),
       art("scene-c rv", Art.px("elephant")), h("p", { class: "meta rv", text: D.dateLabel })));
@@ -348,7 +371,7 @@
     document.documentElement.lang = lang; document.title = D.seoTitle;
     $("#open-wo").textContent = T.weddingOf; $("#open-invite").textContent = W.couple.a + " & " + W.couple.b;
     $("#open-to").textContent = T.dear; $("#open-guest").textContent = guest || T.fallbackGuest;
-    $("#open-hint").textContent = T.openHint; $("#open-date").textContent = D.dateLabel; $("#seal-mono").textContent = W.couple.monogram;
+    $("#open-hint").textContent = T.openHint; $("#open-date").textContent = W.date.slice(8, 10) + " · " + W.date.slice(5, 7) + " · " + W.date.slice(0, 4); $("#seal-mono").textContent = W.couple.monogram;
     $("#seal").setAttribute("aria-label", U.openInvite); $(".skip").textContent = U.skip;
     all(".langsw button").forEach(b => { const on = b.dataset.l === lang; b.setAttribute("aria-pressed", on); if (on) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
     $(".side-in").replaceChildren(art("side-top", Art.px("parasol", "sp sp1 sway") + Art.px("rosette", "sp sp2 float") + Art.px("butterfly", "sp sp3 fly")),
@@ -380,5 +403,9 @@
     const bg = $("[data-parallax]"); let tk = false;
     if (bg) addEventListener("scroll", () => { if (!tk) { tk = true; requestAnimationFrame(() => { bg.style.transform = `translateY(${Math.min(scrollY, 900) * .03}px)`; tk = false; }); } }, { passive: true });
   }
+  // Open the site with ?check=1 to list any artwork file that is missing from the server
+  if (/[?&]check\b/.test(location.search)) Promise.all(["banner", "butterfly", "cartouche", "dove", "elephant", "env-back", "env-front", "env-liner", "fan-batik2", "frame-flowers2", "frame-oval", "gold-flora", "gunungan", "hummer", "janur", "joglo", "key", "lace-fan", "lace-trim", "lamp", "lily-bouquet", "lily-pink", "lily-white", "locket", "lov", "paper", "parasol", "rings", "roses-bg", "rosette", "seal", "stamp-bird", "stamp-flower", "stamp-tulip", "tag", "tampah", "vinyl"].map(n => fetch("assets/art/" + n + ".webp", { method: "HEAD" }).then(r => r.ok ? null : n).catch(() => n)))
+    .then(m => { m = m.filter(Boolean); const b = h("div", { style: "position:fixed;z-index:999;left:0;right:0;top:0;padding:12px;font:14px sans-serif;color:#fff;background:" + (m.length ? "#A4513F" : "#56603F") },
+      m.length ? "Missing in assets/art/: " + m.join(".webp, ") + ".webp" : "All artwork files found."); document.body.append(b); });
   window.WEDDING_READY = true;
 })();
