@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>[Name One] &amp; [Name Two] · Wedding Invitation</title>
+<meta name="description" content="[Name One] and [Name Two] invite you to celebrate their wedding. [Date], [City].">
+<meta name="theme-color" content="#56603F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="[Name One] &amp; [Name Two] · Wedding Invitation">
+<meta property="og:description" content="You are invited. Open the envelope.">
+<meta property="og:image" content="assets/og-image.jpg"><!-- 1200x630; use absolute URL once deployed -->
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=EB+Garamond:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=2">
+</head>
+<body class="locked">
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- 1. Opening invitation -->
+<section id="opening" class="opening" aria-label="Invitation envelope">
+  <div class="envelope" id="envelope">
+    <div class="env-card"><p class="eyebrow">The wedding of</p><p class="script" id="open-invite"></p></div>
+    <div class="flap"></div>
+    <div class="env-front"><p class="eyebrow" id="open-to"></p><p class="script" id="open-guest"></p></div>
+    <button class="seal" id="seal" type="button" aria-label="Open invitation"><span id="seal-mono"></span></button>
+  </div>
+  <p class="hint" id="open-hint"></p>
+</section>
+
+<header class="topbar" id="topbar"><a href="#rsvp">RSVP</a></header>
+<main id="main"><noscript><p style="padding:2rem">Please enable JavaScript to view this invitation.</p></noscript></main>
+
+<button class="music" id="music" type="button" aria-pressed="false" aria-label="Play music" hidden>
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+</button>
+<dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+  <button class="lb-x" aria-label="Close">×</button>
+  <button class="lb-n lb-prev" aria-label="Previous photo">‹</button>
+  <img alt=""><button class="lb-n lb-next" aria-label="Next photo">›</button>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data/content.js?v=2"></script>
+<script src="js/art.js?v=2"></script>
+<script src="js/app.js?v=2"></script>
+<script>
+addEventListener("load",function(){var m=[];
+if(!getComputedStyle(document.documentElement).getPropertyValue("--moss"))m.push("css/styles.css");
+if(!window.WEDDING)m.push("data/content.js");if(!window.Art)m.push("js/art.js");if(!window.WEDDING_READY)m.push("js/app.js (or an error inside it)");
+if(m.length){var d=document.createElement("div");d.style.cssText="position:fixed;z-index:999;left:0;right:0;top:0;background:#A4513F;color:#fff;padding:12px;font:14px sans-serif";d.textContent="Not loading correctly: "+m.join(", ")+". Check the file exists at that exact path in your repo.";document.body.append(d)}});
+</script>
+</body>
+</html>
