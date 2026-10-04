@@ -32,9 +32,9 @@ window.WEDDING = {
 
   story: [
     { date: "", title: "A New Beginning", photo: "assets/images/story-01",
-      text: "I moved across the sea seeking a fresh start and a quiet horizon, with love being the furthest thing from my mind. Tucked away in a remote corner of Kalimantan, I poured myself into work. But on a rare weekend away in the city, on ordinary morning, I picked up a tennis racket—never guessing that across the court, my whole world was waiting." },
+      text: "Chiara moved across the sea seeking a fresh start and a quiet horizon, with love being the furthest thing from her mind. Tucked away in a remote corner of Kalimantan, she poured myself into work. But on a rare weekend away in the city, on ordinary morning, she picked up a tennis racket—never guessing that across the court, her whole world was waiting." },
     { date: "", title: "In God’s Perfect Timing", photo: "assets/images/couple-01",
-      text: "For thirty-one years, Adji had kept his heart carefully guarded, wrapped up in work and routine until an unexpected clearing in his days led him to cross my path. The moment we met, his fears gave way to pure certainty. And for me, he was every gentle, specific detail I had whispered in my prayers, walking straight into my life." },
+      text: "For thirty-one years, Adji had kept his heart carefully guarded, wrapped up in work and routine until an unexpected clearing in his days led him to cross Chiara's path. The moment they met, all his hesitation gave way to pure certainty. And for Chiara, Adji was every gentle, specific detail she had once whispered in her prayers, walking straight into reality" },
     { date: "", title: "The Sweetest Whirlwind", photo: "assets/images/hero",
       text: "From that first hello, love moved with effortless grace. Early flights to meet family, quiet milestones, and an easy promise of forever. Almost exactly a year after our first meeting, we are stepping into a lifetime together. It all unfolded so fast, yet neither of us ever looked back—because when the heart knows, there is never a single doubt." }
   ],
