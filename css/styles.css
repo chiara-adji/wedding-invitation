@@ -252,24 +252,86 @@ form .btn{margin-top:32px;width:100%}
 .vinyl{width:min(210px,58vw);margin:28px auto 16px}.vinyl svg{display:block}
 .vinyl.spin svg{animation:spin 6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
 
-/* ===== v6: Joglo Garden rebuild ===== */
-.opening{background:var(--moss) url(../assets/art/scene.svg) center/cover}
-.opening::before{content:"";position:absolute;inset:0;background:rgba(58,68,48,.74)}
-.opening>*{position:relative}
-.side{display:none}
-@media(min-width:1024px){.side{display:block;position:fixed;left:0;top:0;bottom:0;width:38vw;z-index:5;border-right:8px solid var(--paper);background:url(../assets/art/scene.svg) center/cover}main{margin-left:38vw}}
+/* ===== v7: scrapbook garden · bilingual · original SVG illustration (no image files needed) ===== */
+[hidden]{display:none!important}
 h2::after{content:"";display:block;width:56px;height:1px;background:var(--sage);margin:14px auto 0}
-/* hero = the invitation artwork */
-.hero{display:block;min-height:0;padding:0;background:#ECE2D1}
-.hero-art{position:relative;aspect-ratio:675/1200;max-width:560px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;
-  padding:34% 14% 0;background:url(../assets/art/hero.svg) center/100% 100% no-repeat}
-.hero-art .eyebrow,.hero-art .meta{color:var(--forest)}.hero-art .eyebrow{font-size:11px}
-.hero-art h1{font-size:clamp(34px,10vw,56px);margin:10px 0 6px}
+
+/* --- language switch + top bar --- */
+.topbar{display:flex;align-items:center;gap:8px}
+.langsw{display:inline-flex;border:1px solid var(--linen);border-radius:999px;background:var(--paper);overflow:hidden}
+.langsw button{font:600 11.5px var(--f-disp);letter-spacing:.18em;padding:0 13px;min-height:44px;border:0;background:none;color:var(--ink-soft);cursor:pointer}
+.langsw button[aria-pressed=true]{background:var(--moss);color:var(--ivory)}
+#lang-open{position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;z-index:5}
+.opening .langsw{background:rgba(251,248,240,.08);border-color:rgba(203,209,188,.45)}
+.opening .langsw button{color:var(--mist)}.opening .langsw button[aria-pressed=true]{background:var(--paper);color:var(--forest)}
+
+/* --- shared illustration parts --- */
+.pj{position:absolute;top:0;pointer-events:none}
+.pj svg{width:100%;height:auto;transform-origin:0 0;animation:sway 7s ease-in-out infinite alternate}
+.pj.r{transform:scaleX(-1)}.pj.l{left:0}.pj.r{right:0}
+.fr{position:absolute;pointer-events:none}.fr.r{transform:scaleX(-1)}.fr.l{left:0}.fr.r{right:0}.fr svg{width:100%;height:auto}
+.bt{position:absolute;left:50%;bottom:0;transform:translateX(-50%);pointer-events:none}
+.bt .scene{width:100%;margin:0}
+@keyframes sway{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:.85}}
+.tw{position:absolute;color:var(--mist);font-style:normal;animation:tw 4s ease-in-out infinite;pointer-events:none}
+.art .ff{fill:var(--sage);stroke:none;animation:tw 3.2s ease-in-out infinite}.dark .art .ff{fill:var(--mist)}
+.draw .nd{stroke-dasharray:none;stroke-dashoffset:0;animation:none}
+.art .rs{fill:var(--claret);fill-opacity:.1;stroke:var(--claret)}
+.tape::after{content:"";position:absolute;top:-11px;left:50%;width:84px;height:22px;margin-left:-42px;background:rgba(203,209,188,.8);transform:rotate(-2deg);box-shadow:0 1px 2px rgba(60,50,30,.14);pointer-events:none}
+.tape.ev:nth-of-type(even)::after{transform:rotate(2.5deg)}
+
+/* --- 1. opening: decorated envelope screen --- */
+.opening{padding:24px;overflow:hidden}
+.opening .envelope,.opening .hint{position:relative;z-index:2}
+.deco{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.deco::before,.deco::after{content:"";position:absolute;border:1px solid rgba(203,209,188,.34)}
+.deco::before{inset:14px}.deco::after{inset:21px;border-color:rgba(203,209,188,.16)}
+.deco .pj{width:clamp(110px,34vw,190px);left:14px;top:14px;opacity:.85}.deco .pj.r{left:auto;right:14px}
+.deco .fr{top:34%;width:clamp(90px,26vw,170px);opacity:.42}.deco .fr.l{left:14px}.deco .fr.r{right:14px}
+.deco .bt{width:min(440px,80vw);bottom:22px;opacity:.6}
+@media(max-height:660px){.deco .bt,.deco .fr{display:none}}
+.env-card .eyebrow{font-size:10.5px}
+.env-front .script{max-width:86%;overflow-wrap:anywhere;font-size:clamp(20px,6vw,28px)}
+
+/* --- 2. hero: ornamented, no image files --- */
+.hero{position:relative;display:grid;place-items:center;min-height:100dvh;padding:96px 22px min(64vw,360px);overflow:hidden;
+  background:radial-gradient(110% 60% at 50% 0,#F6F0E2,transparent 72%),radial-gradient(90% 50% at 50% 100%,rgba(203,209,188,.55),transparent 70%),#EDE4D2}
+.hero-deco{position:absolute;inset:0;pointer-events:none}
+.hero-deco .art *{stroke:var(--moss)}.hero-deco .art{opacity:.62}
+.hero-deco .pj{width:clamp(130px,38vw,230px);top:0}
+.hero-deco .fr{top:40%;width:clamp(80px,22vw,150px);opacity:.8}
+.hero-deco .bt{width:min(620px,100%)}
+body.locked .hero-deco .draw path{animation-play-state:paused}
+.hero-art{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:420px}
+.hero-art .eyebrow{font-size:11px;max-width:270px;color:var(--forest)}
+.hero-art h1{font-size:clamp(34px,9.5vw,54px);line-height:1.08;margin:12px 0 4px}
+.hero-art .amp{font-size:clamp(38px,10vw,48px);margin:0}
+.hero-art .meta{color:var(--forest);margin-top:20px}
+
+/* --- 4. the wedding of (parents) --- */
+.couple .script{font-size:clamp(40px,11vw,54px)}
+.people{display:grid;gap:4px;margin-top:34px}
+.person{padding:46px 24px 38px}
+.person .pname{font-size:clamp(25px,6.6vw,31px);line-height:1.2;font-weight:500}
+.person .rel{margin-top:14px}
+.person .parents{font:italic clamp(16px,4.6vw,19px)/1.5 var(--f-disp);margin-top:4px;color:var(--forest);text-wrap:balance}
+.person .addr{font-size:14.5px;color:var(--ink-soft);margin:14px auto 0;max-width:300px}
+.people .amp{font-size:54px;margin:18px 0 20px}
+
+/* --- playlist --- */
+.player{background:var(--moss) repeating-linear-gradient(0deg,rgba(0,0,0,.06) 0 1px,transparent 1px 3px);transform-origin:center}
+.ctl .btns{display:flex;align-items:center;gap:10px}
+.sk{width:40px;height:40px;border-radius:50%;border:1px solid rgba(245,239,227,.45);background:none;cursor:pointer;display:grid;place-items:center;color:var(--ivory);transition:background .2s}
+.sk svg{width:16px;height:16px;fill:currentColor;stroke:none}.sk:hover{background:rgba(245,239,227,.14)}
+.cover{box-shadow:0 0 0 4px #fff,0 3px 8px rgba(0,0,0,.3);transform:rotate(-3deg)}
+#playlist h3{font-size:clamp(24px,6.5vw,30px)}
+
+/* --- countdown --- */
 #countdown .lace-frame{width:min(240px,64vw);margin:28px auto}
-.player{background:var(--moss) repeating-linear-gradient(0deg,rgba(0,0,0,.06) 0 1px,transparent 1px 3px)}
-/* love story: keepsake pages */
-.story-arch{width:min(340px,86vw);aspect-ratio:3/4;margin:0 auto 40px;outline:1px solid var(--sage);outline-offset:8px}
-.story-arch img{width:100%;height:100%;object-fit:cover}
+
+/* --- 5. love story --- */
+.story-art{width:min(300px,80vw);margin:0 auto 40px}.story-art svg{width:100%;height:auto}
 .chaps{position:relative;margin-top:48px;text-align:left}
 .chaps::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--sage)}
 .chap{margin:0 0 68px;padding:54px 26px 80px}.chap:last-child{margin-bottom:0}
@@ -277,33 +339,57 @@ h2::after{content:"";display:block;width:56px;height:1px;background:var(--sage);
   font:500 17px/52px var(--f-disp);letter-spacing:.1em;text-align:center;box-shadow:0 0 0 6px var(--ivory)}
 .chap h3{text-align:center;font-style:italic;font-weight:400;font-size:30px;line-height:1.2;margin-bottom:4px}
 .chap .meta{text-align:center}
-.chap-ph{width:200px;aspect-ratio:4/5;margin:18px auto 24px;outline:1px solid var(--sage);outline-offset:6px;border-radius:999px 999px 0 0}
+.chap .pol-s{width:min(230px,72%);margin:18px auto 26px}
+.chap:nth-child(even) .pol-s{transform:rotate(2.2deg)}
 .chap .corner{opacity:.5}
 .dc::first-letter{font:400 4.2em/.8 var(--f-script);float:left;color:var(--claret);padding:8px 10px 0 0}
 .dc::first-line{font-variant:small-caps;letter-spacing:.06em}
-.ink{display:block;width:min(420px,100%);margin:0 auto 24px;filter:invert(1);mix-blend-mode:screen;opacity:.85}
-.canopy{position:relative;height:150px;width:min(320px,86vw);margin:0 auto -26px}
-.canopy img{position:absolute;top:0;left:0;width:52%;mix-blend-mode:multiply}
-.canopy img.r{left:auto;right:0;transform:scaleX(-1)}
-/* reply card with embroidered roses */
-.reply-card{background:var(--paper) url(../assets/art/roses.svg) center bottom/100% auto no-repeat;padding-bottom:250px}
-/* closing: arched window */
-.closing-art{position:relative;aspect-ratio:675/1200;max-width:560px;margin:0 auto;background:url(../assets/art/closing.svg) center/100% 100% no-repeat}
-.win{position:absolute;left:25%;right:25%;top:17%;height:32%;display:flex;flex-direction:column;justify-content:center;text-align:center;
-  font-style:italic;font-size:clamp(13px,3.6vw,17px);line-height:1.5;color:var(--forest)}
-.win .script{font-size:clamp(26px,7vw,34px);margin-bottom:4px}
-/* v6 fixes: keep text clear of the janur arches */
-.hero-art{padding-top:54%}
-.hero-art .eyebrow{max-width:260px}
-.win{left:28%;right:28%;top:27%;height:25%;font-size:clamp(11.5px,3.2vw,16px);line-height:1.45}
-.win .script{display:none}
-.hero-art{padding-top:48%}
-.hero-art h1{font-size:clamp(32px,9vw,52px);line-height:1.08;margin:8px 0 4px}
-.hero-art .amp{font-size:36px;margin:0}
-.hero-art .meta{text-shadow:0 0 6px #ECE2D1,0 0 10px #ECE2D1}
 
-/* v7: original vector artwork (no raster images) */
-.ink{filter:none;mix-blend-mode:normal;opacity:1}
-.canopy img{mix-blend-mode:normal;width:46%}
-.canopy{height:130px;margin-bottom:-10px}
-.reply-card{background-color:var(--paper)}
+/* --- 6. the day --- */
+.way-art{width:min(380px,92vw);margin:0 auto 20px}.way-art svg{width:100%;height:auto}
+.ev.tape::after{background:rgba(203,209,188,.9)}
+
+/* --- gallery canopy (replaces janur image) --- */
+.canopy{position:relative;height:150px;width:min(420px,100%);margin:0 auto -34px}
+.canopy .pj{width:26%}
+
+/* --- RSVP card with rose vine --- */
+.reply-card{padding-bottom:120px}
+.vine-wrap{position:absolute;left:0;right:0;bottom:0;pointer-events:none}.vine-wrap svg{width:100%;height:auto}
+
+/* --- desktop side panel (replaces image) --- */
+.side{display:none}
+@media(min-width:1024px){
+  .side{display:block;position:fixed;left:0;top:0;bottom:0;width:38vw;z-index:5;border-right:8px solid var(--paper);overflow:hidden}
+  .side-in{position:absolute;inset:-30px 0;display:grid;align-content:center;justify-items:center;text-align:center;padding:40px}
+  .side-top{position:absolute;inset:0;pointer-events:none}.side-top .pj{width:clamp(110px,15vw,200px);top:30px}
+  .side-txt{position:relative;z-index:2;margin-bottom:22vh}
+  .side-txt .script{font-size:clamp(48px,5vw,76px);color:var(--paper);margin:8px 0}
+  .side-bt{position:absolute;left:8%;right:8%;bottom:50px;pointer-events:none;opacity:.75}.side-bt svg{width:100%;height:auto}
+  main{margin-left:38vw}
+}
+
+/* --- 7. closing: one even, centred layout --- */
+.closing{padding:96px 24px 56px}
+.closing .msg-c{font:italic 20px/1.65 var(--f-disp);max-width:440px;margin:0 auto;color:var(--paper)}
+.closing .quote{margin-top:40px;font-size:19px;color:var(--mist)}
+.closing .joy{font-size:clamp(34px,9.5vw,46px);color:var(--paper);margin:64px 0 34px}
+.fam{max-width:420px;margin:0 auto}
+.fam .eyebrow{font-size:11.5px;margin-bottom:14px}
+.fam .pn{font:500 clamp(17px,4.9vw,22px)/1.45 var(--f-disp);color:var(--paper);text-wrap:balance}
+.fam .addr{font:italic 15px/1.55 var(--f-body);color:var(--mist);margin-top:12px}
+.fam-sep{font:400 44px/1 var(--f-script);color:var(--sage);margin:24px 0}
+.scene-c{width:min(420px,92vw);margin:60px auto 22px;opacity:.85}.scene-c svg{width:100%;height:auto;margin:0}
+
+@media(prefers-reduced-motion:reduce){.pj svg,.tw,.art .ff{animation:none!important}.tw{opacity:.4}.draw path{stroke-dashoffset:0}}
+
+/* text on paper cards inside dark sections + envelope paper must stay dark */
+.dark .card .cap,.dark .card .meta{color:var(--ink-soft)}
+.dark .card .eyebrow,.dark .card .script{color:var(--moss)}
+.opening .envelope .eyebrow{color:var(--ink-soft)}.opening .envelope .script{color:var(--moss)}
+
+/* --- Quran verse --- */
+.verse{padding:88px 24px 96px}
+.verse .ar{font-family:"Amiri Quran","Amiri","Scheherazade New","Traditional Arabic",serif;font-size:clamp(25px,7.2vw,33px);line-height:2.35;color:var(--forest);margin:8px 0 22px;text-wrap:balance}
+.verse .tr{font:italic clamp(17px,4.8vw,19px)/1.7 var(--f-disp);color:var(--ink-soft);max-width:420px;margin:0 auto}
+.verse .ref{margin-top:22px}
