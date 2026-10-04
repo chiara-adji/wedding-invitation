@@ -61,18 +61,19 @@ window.WEDDING = {
         eventsTitle: "The day",
         galleryTitle: "Moments",
         galleryCaption: "Two guarded hearts, one quiet wish, and a whirlwind year that turned into forever.",
-        rsvpTitle: "Will you join us?",
+        rsvpTitle: "Will You Join Us?",
         giftTitle: "Warmest Wishes",
         giftIntro: "Your blessings and warm wishes are truly more than enough. For those who have kindly asked and wish to share an additional blessing, you may do so through the details below.",
         registryTitle: "Registry", registryIntro: "",
         wishesTitle: "Wishes",
-        closing: "We have found our quiet certainty in each other. Thank you for walking alongside our story, and we cannot wait to share the beginning of our forever with you."
+        closing: "We have found our quiet certainty in each other. Thank you for walking alongside our story, and we truly look forward to celebrating the beginning of our forever with you."
       },
 
       ui: {
         units: ["Days", "Hours", "Min", "Sec"], timer: "Time remaining",
         viewMap: "View on map", mapTitle: "Map to ", dress: "Dress code",
         openPhoto: "Open photo: ", noPhotos: "Photos are still loading",
+        songsHint: "Tap any song to play it",
         play: "Play music", pause: "Pause music", prev: "Previous song", next: "Next song",
         tapAgain: "Tap again to play", musicMissing: "Music file not found",
         openInvite: "Open invitation", skip: "Skip to content", lang: "Language",
@@ -91,11 +92,11 @@ window.WEDDING = {
 
       story: [
         { title: "A New Beginning",
-          text: "I moved across the sea seeking a fresh start and a quiet horizon, with love being the furthest thing from my mind. Tucked away in a remote corner of Kalimantan, I poured myself into work. But on a rare weekend away in the city, on an ordinary morning, I picked up a tennis racket—never guessing that across the court, my whole world was waiting." },
+          text: "Chiara moved across the sea seeking a fresh start and a quiet horizon, with love being the furthest thing from her mind. Tucked away in a remote corner of East Kalimantan, she poured herself wholly into work. But on a weekend away in Balikpapan, she joined an early morning tennis coaching session—never guessing that right there on the court, both of their worlds were about to gently shift forever." },
         { title: "In God’s Perfect Timing",
-          text: "For thirty-one years, Adji had kept his heart carefully guarded, wrapped up in work and routine until an unexpected clearing in his days led him to cross my path. The moment we met, his fears gave way to pure certainty. And for me, he was every gentle, specific detail I had whispered in my prayers, walking straight into my life." },
+          text: "All his life, Adji had kept his heart entirely to himself—a hopeless romantic who poured his days into work and routine, waiting for a love he could truly believe in. Then, an unexpected clearing in his schedule led him to that very court. The moment he met Chiara, all hesitation vanished into pure certainty. And for Chiara, Adji was every quiet, specific detail she had once whispered in her prayers, walking straight into reality." },
         { title: "The Sweetest Whirlwind",
-          text: "From that first hello, love moved with effortless grace. Early flights to meet family, quiet milestones, and an easy promise of forever. Almost exactly a year after our first meeting, we are stepping into a lifetime together. It all unfolded so fast, yet neither of us ever looked back—because when the heart knows, there is never a single doubt." }
+          text: "From that first hello, love moved with effortless grace. Early flights to meet family, quiet milestones, and an easy promise of forever. Almost exactly a year after their first meeting, they are stepping into a lifetime together. It all unfolded so fast, yet neither of them ever looked back—because when the heart knows, there is never a single doubt." }
       ],
 
       events: [
@@ -104,9 +105,9 @@ window.WEDDING = {
       ],
 
       quotes: {
-        hero:  { text: "I crossed an ocean chasing peace, never knowing I was walking straight into the arms of my answered prayers.", by: "" },
-        story: { text: "I was not looking for love, but love found me—and it looked exactly like home.", by: "" },
-        close: { text: "Every step, every turn, and every quiet hope was simply leading me to you.", by: "" }
+        hero:  { text: "When the time was finally right, love showed up gently—quiet, certain, and right on time.", by: "" },
+        story: { text: "In a world full of noise, you became the quietest, softest answer to my prayers.", by: "" },
+        close: { text: "Different paths, one shared destination—brought together by grace for a lifetime.", by: "" }
       },
 
       bride: { name: "drg. Millienanda Chiara Adnyn", rel: "Second daughter of",
@@ -139,19 +140,20 @@ window.WEDDING = {
         storyTitle: "Kisah Cinta Kami",
         eventsTitle: "Hari Bahagia",
         galleryTitle: "Momen",
-        galleryCaption: "Dua hati yang terjaga, satu harapan yang lirih, dan setahun penuh kejutan yang tumbuh menjadi selamanya.",
-        rsvpTitle: "Sudikah Anda hadir bersama kami?",
+        galleryCaption: "Dua hati yang saling menjaga, satu doa yang terwujud, dan perjalanan satu tahun yang menjelma selamanya.",
+        rsvpTitle: "Berkenan Menjadi Bagian dari Hari Bahagia Kami?",
         giftTitle: "Ungkapan Kasih",
         giftIntro: "Doa restu dan ucapan hangat dari Anda sudah lebih dari cukup bagi kami. Bagi yang berkenan berbagi tanda kasih, dapat melalui keterangan berikut.",
         registryTitle: "Daftar Hadiah", registryIntro: "",
         wishesTitle: "Ucapan & Doa",
-        closing: "Kami telah menemukan keyakinan yang tenang di dalam satu sama lain. Terima kasih telah menemani langkah kisah kami, dan kami tak sabar berbagi awal dari selamanya kami bersama Anda."
+        closing: "Kami telah menemukan kepastian dan ketenangan di dalam diri satu sama lain. Terima kasih atas ketulusan doa dan dukungan yang senantiasa mengiringi langkah kami. Merupakan suatu kehormatan dan kebahagiaan bagi kami untuk menyambut hari istimewa ini bersama Bapak/Ibu/Saudara/i sekalian."
       },
 
       ui: {
         units: ["Hari", "Jam", "Menit", "Detik"], timer: "Waktu tersisa",
         viewMap: "Lihat peta", mapTitle: "Peta menuju ", dress: "Kode busana",
         openPhoto: "Buka foto: ", noPhotos: "Foto masih dimuat",
+        songsHint: "Ketuk lagu untuk memutarnya",
         play: "Putar musik", pause: "Jeda musik", prev: "Lagu sebelumnya", next: "Lagu berikutnya",
         tapAgain: "Ketuk sekali lagi untuk memutar", musicMissing: "Berkas musik tidak ditemukan",
         openInvite: "Buka undangan", skip: "Lewati ke konten", lang: "Bahasa",
@@ -170,11 +172,11 @@ window.WEDDING = {
 
       story: [
         { title: "Awal yang Baru",
-          text: "Aku menyeberangi lautan untuk mencari awal yang baru dan cakrawala yang tenang; cinta adalah hal terjauh dari pikiranku. Di sudut terpencil Kalimantan, aku menenggelamkan diri dalam pekerjaan. Hingga pada suatu akhir pekan yang jarang kudapat di kota, di sebuah pagi yang biasa, aku meraih raket tenis, tanpa pernah menyangka bahwa di seberang lapangan, seluruh duniaku sedang menunggu." },
-        { title: "Tepat pada Waktu-Nya",
-          text: "Selama tiga puluh satu tahun, Adji menjaga hatinya dengan hati-hati, tenggelam dalam pekerjaan dan rutinitas, hingga sebuah ruang kosong yang tak terduga dalam hari-harinya mempertemukannya dengan langkahku. Saat kami bertemu, segala keraguannya luruh menjadi keyakinan. Bagiku, ia adalah setiap detail lembut yang pernah kubisikkan dalam doa, melangkah masuk ke dalam hidupku." },
-        { title: "Setahun yang Begitu Manis",
-          text: "Sejak sapaan pertama, cinta mengalir dengan begitu anggun. Penerbangan pagi untuk bertemu keluarga, tonggak-tonggak kecil yang tenang, dan janji sederhana tentang selamanya. Hampir tepat setahun setelah pertemuan pertama kami, kami melangkah menuju kehidupan bersama. Semuanya terjadi begitu cepat, namun tak sekali pun kami menoleh ke belakang, karena ketika hati sudah tahu, tak ada lagi keraguan." }
+          text: "Chiara melangkah ke pulau seberang demi mencari awal baru dan ritme hidup tenang, tanpa memikirkan cinta. Di sudut Kalimantan Timur, seluruh fokus tercurah untuk bekerja. Namun saat berakhir pekan di Balikpapan, Chiara mengikuti sesi les tenis pada pagi hari—tanpa pernah menduga bahwa di sudut lapangan tersebut, dunia mereka berdua akan perlahan berubah selamanya." },
+        { title: "Waktu Terbaik-Nya",
+          text: "Sepanjang hidup, Adji menjaga hati dengan begitu hati-hati. Hari-harinya tercurah penuh untuk pekerjaan dan rutinitas, tanpa pernah melabuhkan rasa kepada siapa pun sebelum Chiara. Hingga tiba jeda waktu tak terduga yang menuntun langkah Adji ke lapangan tersebut. Saat tatap pertama bertemu, rasa ragu langsung berganti kepastian. Bagi Chiara, Adji adalah wujud nyata dari setiap detail doa yang pernah dipanjatkan dalam hening." },
+        { title: "Menuju Selamanya",
+          text: "Sejak sapaan pertama itu, segalanya mengalir dengan begitu tenang dan pasti. Perjalanan awal untuk saling mengenal keluarga, momen-momen kebersamaan yang hangat, hingga keyakinan untuk melangkah bersama. Nyaris tepat satu tahun setelah pertemuan pertama, keduanya bersiap memulai lembaran baru seumur hidup. Segalanya berjalan begitu cepat tanpa sejengkal pun keraguan—sebab ketika hati telah yakin, segalanya terasa begitu tepat." }
       ],
 
       events: [
@@ -183,9 +185,9 @@ window.WEDDING = {
       ],
 
       quotes: {
-        hero:  { text: "Aku menyeberangi samudra demi mencari ketenangan, tanpa tahu bahwa aku sedang melangkah menuju pelukan doa-doa yang terjawab.", by: "" },
-        story: { text: "Aku tidak sedang mencari cinta, tetapi cinta menemukanku, dan ia terasa persis seperti pulang.", by: "" },
-        close: { text: "Setiap langkah, setiap belokan, dan setiap harapan yang kubisikkan pelan, ternyata hanya menuntunku kepadamu.", by: "" }
+        hero:  { text: "Saat segalanya telah tepat, cinta hadir dengan begitu lembut—tenang, pasti, dan tepat waktu.", by: "" },
+        story: { text: "Di tengah dunia yang penuh riuh, hadirmu adalah jawaban paling tenang atas doa-doaku.", by: "" },
+        close: { text: "Dua perjalanan berbeda yang bermuara pada satu tujuan—dipertemukan dengan indah untuk selamanya.", by: "" }
       },
 
       bride: { name: "drg. Millienanda Chiara Adnyn", rel: "Putri kedua dari",
