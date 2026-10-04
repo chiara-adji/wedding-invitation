@@ -8,7 +8,7 @@ window.WEDDING = {
   hero: { photo: "assets/images/hero", alt: "The couple walking together through a tropical garden" },
   couple: { a: "Chiara", b: "Adji", monogram: "C & A" },
   date: "2026-12-19T08:00:00+07:00",   // countdown target: Akad Nikah 08:00 WIB
-  dateLabel: "Saturday, 19 December 2026 · Cepu",
+  dateLabel: "Cepu · Saturday, 19 December 2026",
 
   texts: {
     dear: "Dear",
@@ -73,7 +73,7 @@ window.WEDDING = {
 
   registry: [ { name: "Our wishlist", url: "", note: "" } ],   // paste the Google Sheets link in url
 
-  music: { src: "assets/music/Johnny Stimson - Honeymoon (Official Audio).mp3", title: "Honeymoon" },
+  music: { src: "assets/music/Johnny Stimson - Honeymoon (Official Audio).mp3", title: "Honeymoon", artist: "Johnny Stimson" },
 
   rsvp: { endpoint: "https://script.google.com/macros/s/AKfycbxjdrHYKcfRBa0RPFD9BDBEtYzTuK43nOALiL273Xw9vEaGazgKIcwexv7Q4d06g8XT/exec", maxGuests: 4, deadline: "" },
 
