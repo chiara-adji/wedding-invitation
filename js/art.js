@@ -29,5 +29,14 @@ window.Art = (() => {
   const divider = () => `<svg class="art" viewBox="0 0 120 20" aria-hidden="true">
     <path d="M0 10H46M74 10H120"/><path d="M60 3v14M60 10q-7-7-12-2M60 10q7-7 12-2"/></svg>`;
 
-  return { scene, corner, divider };
+  const ring = (n, rx, ry, r, extra) => Array.from({ length: n }, (_, i) => { const q = i / n * 6.2832;
+    return `<circle cx="${(150 + rx * Math.cos(q)).toFixed(1)}" cy="${(190 + ry * Math.sin(q)).toFixed(1)}" r="${r}" ${extra}/>`; }).join("");
+  // Scalloped lace oval (decorative frame for the hero portrait)
+  const lace = () => `<svg viewBox="0 0 300 380" aria-hidden="true">${ring(46, 128, 168, 15, 'fill="#FFFFFF" stroke="#E2D8C4" stroke-width="1"')}
+    <ellipse cx="150" cy="190" rx="116" ry="156" fill="#FFFFFF"/>${ring(46, 118, 158, 2.6, 'fill="#E2D8C4"')}${ring(46, 108, 148, 1.2, 'fill="#CBD1BC"')}</svg>`;
+  const vinyl = () => `<svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="98" fill="#1D1D1B"/>
+    ${[86, 74, 62, 50].map(r => `<circle cx="100" cy="100" r="${r}" fill="none" stroke="#3A3A36"/>`).join("")}
+    <path d="M100 100V2A98 98 0 0 1 172 28z" fill="#fff" opacity=".07"/><circle cx="100" cy="100" r="32" fill="#56603F"/>
+    <text x="100" y="97" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="12" fill="#F5EFE3">C &amp; A</text><circle cx="100" cy="108" r="2.5" fill="#F5EFE3"/></svg>`;
+  return { scene, corner, divider, lace, vinyl };
 })();

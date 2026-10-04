@@ -16,7 +16,7 @@
       else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
       else el.setAttribute(k, v);
     }
-    kids.flat().forEach(c => c != null && c !== false && el.append(c));
+    kids.flat(Infinity).forEach(c => c != null && c !== false && el.append(c));
     return el;
   }
   // Photo with automatic extension detection: "assets/images/hero" tries .jpg, .jpeg, .png, .webp
@@ -52,21 +52,17 @@
 
   /* ---------- Components ---------- */
   function Hero() {
-    const joglo = `<svg class="joglo" viewBox="0 0 200 130" aria-hidden="true">
-      <path pathLength="1" d="M92 12h16l6 40 62 36H22l62-36z"/>
-      <path pathLength="1" d="M10 96q90-22 180 0"/>
-      <path pathLength="1" d="M34 96v22M70 96v22M130 96v22M166 96v22M24 118h152"/></svg>`;
     const s = section("hero", "hero");
     s.prepend(h("div", { class: "bg", "data-parallax": "", "aria-hidden": "true" }));
-    const wrap = $(".wrap", s);
-    wrap.insertAdjacentHTML("beforeend", Art.scene()); s.append(Art.corner("l"), Art.corner("r"));
-    wrap.append(
+    ["l", "r"].forEach(x => s.append(h("img", { class: "janur " + x, src: "assets/images/janur.jpeg", alt: "", "aria-hidden": "true" })));
+    const frame = h("div", { class: "lace-frame rv" });
+    frame.innerHTML = Art.lace();
+    const pol = (g, cls) => h("figure", { class: "pol " + cls }, photo(g.src, g.alt));
+    frame.append(h("div", { class: "oval" }, photo(W.hero.photo, W.hero.alt)), pol(W.gallery[0], "p1"), pol(W.gallery[2], "p2"));
+    $(".wrap", s).append(
       h("p", { class: "eyebrow rv", text: T.invite }),
       h("h1", { id: "hero-t", class: "rv" }, W.couple.a, h("span", { class: "amp", text: "&" }), W.couple.b),
-      h("p", { class: "script rv", text: T.heroWhisper }),
-      h("p", { class: "meta date rv", text: W.dateLabel }),
-      W.hero && W.hero.photo ? h("div", { class: "arch hero-photo rv" }, photo(W.hero.photo, W.hero.alt)) : null,
-      quote(W.quotes.hero));
+      h("p", { class: "meta date rv", text: W.dateLabel }), frame, quote(W.quotes.hero));
     return s;
   }
 
@@ -89,7 +85,7 @@
   function Story() {
     const tl = h("div", { class: "tl" }, W.story.map(c => h("article", { class: "rv" },
       h("p", { class: "meta", text: c.date }), h("h3", { text: c.title }), h("p", { text: c.text }),
-      c.photo ? h("div", { class: "arch" }, photo(c.photo, c.title)) : null)));
+      c.photo ? h("figure", { class: "pol-s" }, photo(c.photo, c.title)) : null)));
     const s = section("story", "", ...head("", "", T.storyTitle), tl, quote(W.quotes.story));
     $("h2", s).id = "story-t"; return s;
   }
@@ -102,7 +98,7 @@
     const s = section("events", "dark", ...head("", "", T.eventsTitle), cards,
       W.venueMap ? h("div", { class: "map rv" }, h("iframe", { title: "Map to " + W.venueMap.name, src: "https://www.google.com/maps?q=" + encodeURIComponent(W.venueMap.query) + "&output=embed", loading: "lazy", referrerpolicy: "no-referrer-when-downgrade" })) : null,
       W.dressCode ? [rule(), h("p", { class: "eyebrow", text: "Dress code" }), h("p", { class: "rv", text: W.dressCode })] : null);
-    $("h2", s).id = "events-t"; return s;
+    const sc = h("div", { class: "rv" }); sc.innerHTML = Art.scene(); $(".wrap", s).prepend(sc); $("h2", s).id = "events-t"; return s;
   }
 
   function Gallery() {
@@ -127,18 +123,33 @@
     return { open(n) { const L = list(); if (!L.length) return toast("Add photos in content.js"); const src = W.gallery[n].url; d.showModal(); show(src ? L.findIndex(p => p.url === src) : 0); } };
   })();
 
+  function Playlist() {
+    const rec = h("div", { class: "vinyl" }); rec.innerHTML = Art.vinyl();
+    return section("playlist", "dark", h("p", { class: "script rv", text: "Our song" }),
+      h("div", { class: "player rv" }, h("div", { class: "cover" }, photo(W.hero.photo, W.hero.alt)),
+        h("div", { class: "ctl" }, h("button", { type: "button", class: "pp", "aria-pressed": "false", "aria-label": "Play music" }),
+          h("div", { class: "prog", role: "presentation" }, h("i")), h("span", { class: "tm cap", text: "0:00" }))),
+      rec, h("h3", { id: "playlist-t", class: "rv", text: W.music.title }), h("p", { class: "meta rv", text: W.music.artist }));
+  }
+
   function Rsvp() {
-    const f = h("form", { id: "rsvp-form", novalidate: "" },
-      h("label", { for: "r-name", text: "Your name" }), h("input", { id: "r-name", name: "name", type: "text", required: "", maxlength: "60", autocomplete: "name", value: guest }),
-      h("fieldset", {}, h("legend", { text: "Attendance" }),
-        ...[["yes", "Joyfully attending"], ["no", "Regretfully declining"]].map(([v, l]) =>
-          h("label", { class: "radio" }, h("input", { type: "radio", name: "attendance", value: v, required: "" }), l))),
-      h("label", { for: "r-n", text: "Number of guests" }),
-      h("input", { id: "r-n", name: "guests", type: "number", min: "1", max: String(W.rsvp.maxGuests), value: "1", inputmode: "numeric" }),
-      h("label", { for: "r-m", text: "Message (optional)" }), h("textarea", { id: "r-m", name: "message", maxlength: "400" }),
-      h("label", { class: "radio" }, h("input", { type: "checkbox", name: "public", value: "1" }), "Show my message in Wishes"),
+    const R = W.rsvp, num = h("input", { id: "r-n", name: "guests", value: "1", readonly: "", class: "num", "aria-label": "Number of guests" });
+    const step = (d, t) => h("button", { type: "button", class: "stp", "aria-label": d > 0 ? "More guests" : "Fewer guests", text: t,
+      onclick: () => { num.value = Math.min(R.maxGuests, Math.max(1, (+num.value || 1) + d)); } });
+    const tick = (type, name, v, t) => h("label", { class: "tick" }, h("input", { type, name, value: v, required: name === "attendance" ? "" : null }), h("i", { "aria-hidden": "true" }), t);
+    const count = h("div", { class: "row" }, h("span", { class: "cap", text: "Number of guests, including you" }), h("div", { class: "stepper" }, step(-1, "−"), num, step(1, "+")));
+    const f = h("form", { id: "rsvp-form", novalidate: "", class: "reply" },
+      h("p", { class: "script", text: "The favour of a reply" }),
+      R.deadline ? h("p", { class: "cap", text: "Kindly respond by " + R.deadline }) : null,
+      h("div", { class: "row name" }, h("label", { for: "r-name", class: "mk", text: "I," }),
+        h("input", { id: "r-name", name: "name", type: "text", required: "", maxlength: "60", autocomplete: "name", value: guest }), h("span", { class: "cap", text: "your name" })),
+      h("div", { class: "row" }, tick("radio", "attendance", "yes", "will gladly attend"), tick("radio", "attendance", "no", "must regretfully decline")),
+      count,
+      h("div", { class: "row note" }, h("label", { for: "r-m", class: "script sm", text: "A few words for us" }), h("textarea", { id: "r-m", name: "message", maxlength: "400" })),
+      tick("checkbox", "public", "1", "Share my words in Wishes"),
       h("input", { class: "hp", name: "website", tabindex: "-1", autocomplete: "off", "aria-hidden": "true" }),
-      h("button", { class: "btn", type: "submit", text: "Send RSVP" }), h("p", { class: "msg", role: "status" }));
+      h("button", { class: "btn", type: "submit", text: "Send reply" }), h("p", { class: "msg", role: "status" }));
+    f.addEventListener("change", e => { if (e.target.name === "attendance") count.hidden = e.target.value === "no"; });
     f.addEventListener("submit", async e => {
       e.preventDefault();
       const msg = $(".msg", f), btn = $(".btn", f), fd = new FormData(f);
@@ -157,7 +168,7 @@
         f.replaceWith(h("p", { class: "thanks", text: "Thank you, " + name }));
       } catch { msg.textContent = "Could not send. Check your connection and try again."; msg.classList.add("err"); btn.disabled = false; }
     });
-    const s = section("rsvp", "", ...head(W.rsvp.deadline, "", T.rsvpTitle), f);
+    const s = section("rsvp", "", ...head(W.rsvp.deadline, "", T.rsvpTitle), h("div", { class: "card reply-card rv" }, f, Art.corner("l"), Art.corner("r")));
     $("h2", s).id = "rsvp-t"; return s;
   }
 
@@ -205,17 +216,23 @@
   $("#open-invite").textContent = W.couple.a + " & " + W.couple.b;
   $("#open-hint").textContent = T.openHint; $("#seal-mono").textContent = W.couple.monogram;
 
-  $("#main").append(Hero(), Countdown(), Story(), Events(), Gallery(), Rsvp(), Gift(), Registry(), Wishes(), Closing());
+  $("#main").append(Hero(), Countdown(), Story(), Events(), Gallery(), Playlist(), Rsvp(), Gift(), Registry(), Wishes(), Closing());
 
   const music = $("#music"); music.hidden = false; let audio = null;
-  const sync = () => { const on = !!audio && !audio.paused; music.classList.toggle("on", on); music.setAttribute("aria-pressed", on); music.setAttribute("aria-label", on ? "Pause music" : "Play music"); };
+  const all = s => document.querySelectorAll(s), fmt = t => Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0");
+  const sync = () => { const on = !!audio && !audio.paused;
+    all("#music,.pp").forEach(b => { b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", on ? "Pause music" : "Play music"); });
+    all(".vinyl").forEach(v => v.classList.toggle("spin", on)); };
+  const toggle = () => { if (!audio) return toast("Set music.src in content.js"); audio.paused ? audio.play().catch(() => toast("Tap again to play")) : audio.pause(); };
   if (W.music.src) {
     audio = new Audio(encodeURI(W.music.src)); audio.loop = true; audio.preload = "auto";
     audio.addEventListener("play", sync); audio.addEventListener("pause", sync);
     audio.addEventListener("error", () => toast("Music file not found"));
+    audio.addEventListener("timeupdate", () => { const p = audio.duration ? audio.currentTime / audio.duration : 0;
+      all(".prog i").forEach(i => i.style.width = p * 100 + "%"); all(".tm").forEach(t => t.textContent = fmt(audio.currentTime)); });
   }
-  music.onclick = () => { if (!audio) return toast("Set music.src in content.js");
-    audio.paused ? audio.play().catch(() => toast("Tap again to play")) : audio.pause(); };
+  music.onclick = toggle; all(".pp").forEach(b => b.onclick = toggle);
+  all(".prog").forEach(p => p.onclick = e => { if (audio && audio.duration) { const r = p.getBoundingClientRect(); audio.currentTime = audio.duration * (e.clientX - r.left) / r.width; } });
 
   $("#seal").addEventListener("click", () => {
     $("#envelope").classList.add("opened"); $("#seal").disabled = true;
@@ -223,7 +240,7 @@
     setTimeout(() => { $("#opening").classList.add("gone"); document.body.classList.remove("locked"); scrollTo(0, 0); }, reduced ? 200 : 1900);
     setTimeout(() => $("#opening").setAttribute("hidden", ""), reduced ? 700 : 2900);
   });
-  ["story", "events", "gift", "rsvp", "closing"].forEach(id => $("#" + id).append(Art.corner("l"), Art.corner("r")));
+  ["story", "events", "gift", "closing"].forEach(id => $("#" + id).append(Art.corner("l"), Art.corner("r")));
 
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
   document.querySelectorAll(".rv").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 80 + "ms"; io.observe(el); });
