@@ -312,8 +312,9 @@
     const mk = cls => h("button", { type: "button", class: "btn ghost gtoggle " + cls, "aria-expanded": String(guideOpen), "aria-controls": "guide-body" });
     const top = mk("top"), bot = mk("bot");
     const body = h("div", { class: "gbody", id: "guide-body" }, h("div", { class: "gin" }, h("p", { class: "gnote", text: C.note }),
-      grp(C.aboutTitle, h("p", { class: "gtxt", text: C.about })), grp(C.stayTitle, C.stays.map(place)), grp(C.eatTitle, C.eats.map(place)),
-      grp(C.trainTitle, h("p", { class: "gsub", text: C.trainSub }), h("p", { class: "gtxt", text: C.trainIntro }), C.routes.map(ticket), h("p", { class: "cap gret", text: C.returnNote })),
+      grp(C.aboutTitle, h("p", { class: "gtxt", text: C.about })), grp(C.trainTitle, h("p", { class: "gsub", text: C.trainSub }), h("p", { class: "gtxt", text: C.trainIntro }), C.routes.map(ticket), h("p", { class: "cap gret", text: C.returnNote })),
+      grp(C.eatTitle, C.eats.map(place)),
+      grp(C.stayTitle, C.stays.map(place)),
       h("div", { class: "gend" }, bot)));
     const s = section("guide", "guide" + (guideOpen ? " open" : ""), ttl, h("p", { class: "gteaser rv", text: C.teaser }), top, body);
     const paint = () => { s.classList.toggle("open", guideOpen); body.inert = !guideOpen;
