@@ -618,3 +618,10 @@ body{font-synthesis:none}
 
 /* Moments: an even number of photos stays in a neat 2-column grid */
 @media(min-width:700px){.grid.even{grid-template-columns:repeat(2,1fr);max-width:560px}}
+
+/* ===== v16: mini game link on the envelope screen ===== */
+.opening .game-link{position:relative;z-index:2;justify-self:center;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 22px;
+  font:italic 500 17px var(--f-disp);letter-spacing:.03em;color:var(--paper);text-decoration:none;
+  border:1px solid rgba(203,209,188,.6);border-radius:999px;background:rgba(251,248,240,.08);transition:background .25s,color .25s}
+.opening .game-link:hover{background:var(--paper);color:var(--forest)}
+.opened ~ .game-link,.opening.gone .game-link{opacity:0;pointer-events:none}
