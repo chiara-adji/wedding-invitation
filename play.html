@@ -389,7 +389,7 @@ function setControls(mode) {
     if (done.chiara && done.adji) { b.textContent = t('again'); b.onclick = showSelect; }
     else { b.textContent = other === 'adji' ? t('tryA') : t('tryC'); b.onclick = () => start(other); }
     const a = document.createElement('a'); a.className = 'pbtn'; a.textContent = t('toInv');
-    a.href = './';
+    a.href = './' + location.search;
     el.append(b, a);
   }
 }
@@ -902,6 +902,7 @@ $('btn-play').onclick = showSelect;
 $('pick-chiara').onclick = () => start('chiara');
 $('pick-adji').onclick = () => start('adji');
 
+document.querySelectorAll('a[href="./"]').forEach(a => a.href = './' + location.search);
 loadAll().then(() => {
   IMG.adji_left = flip(IMG.adji_right);
   IMG.chiara_left = flip(IMG.chiara_right);
