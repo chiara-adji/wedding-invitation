@@ -619,9 +619,21 @@ body{font-synthesis:none}
 /* Moments: an even number of photos stays in a neat 2-column grid */
 @media(min-width:700px){.grid.even{grid-template-columns:repeat(2,1fr);max-width:560px}}
 
-/* ===== v16: mini game link on the envelope screen ===== */
-.opening .game-link{position:relative;z-index:2;justify-self:center;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 22px;
-  font:italic 500 17px var(--f-disp);letter-spacing:.03em;color:var(--paper);text-decoration:none;
-  border:1px solid rgba(203,209,188,.6);border-radius:999px;background:rgba(251,248,240,.08);transition:background .25s,color .25s}
-.opening .game-link:hover{background:var(--paper);color:var(--forest)}
-.opened ~ .game-link,.opening.gone .game-link{opacity:0;pointer-events:none}
+/* ===== v16: mini game choice after tapping the seal ===== */
+.gate{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:24px;background:rgba(30,34,22,.55);
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .35s var(--ease)}
+.gate.in{opacity:1}
+.gate-card{position:relative;width:min(340px,100%);padding:34px 24px 26px;text-align:center;
+  background-image:linear-gradient(rgba(251,248,240,.86),rgba(251,248,240,.86)),url(../assets/art/paper.webp);background-color:#FBF8F0;background-size:auto,cover;
+  box-shadow:0 14px 34px rgba(0,0,0,.35);transform:translateY(14px) scale(.97);transition:transform .45s var(--ease)}
+.gate.in .gate-card{transform:none}
+.gate-card::before{content:"";position:absolute;inset:9px;border:1px solid var(--sage);opacity:.55;pointer-events:none}
+.gate-duo{display:flex;justify-content:center;align-items:flex-end;gap:2px;height:76px;margin:-6px 0 12px}
+.gate-duo img{height:100%;width:auto;image-rendering:pixelated}
+.gate .eyebrow{font-size:11px;color:var(--moss)}
+.gate-t{font:400 clamp(30px,8.4vw,38px)/1.1 var(--f-script);color:var(--forest);margin:6px 0 8px}
+.gate-s{font:italic 500 16px/1.5 var(--f-disp);color:var(--ink-soft);max-width:28ch;margin:0 auto}
+.gate-btns{display:grid;gap:10px;margin-top:22px;position:relative}
+.gate-btns .btn{width:100%;min-height:48px;padding:0 18px;letter-spacing:.14em}
+.gate-m{margin-top:14px;font:600 10.5px var(--f-disp);letter-spacing:.2em;text-transform:uppercase;color:var(--sage)}
+@media(prefers-reduced-motion:reduce){.gate,.gate-card{transition:none}}
