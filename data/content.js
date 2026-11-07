@@ -10,7 +10,7 @@ window.WEDDING = {
   date: "2026-12-19T08:00:00+07:00",      // countdown target: Akad Nikah 08:00 WIB
   hero: { photo: "assets/images/hero.jpeg" },
   // Bride & groom portraits on "The Wedding of" page (shown inside the oval frame)
-  profiles: { bride: "assets/images/profile-01.jpeg", groom: "assets/images/profile-02.jpeg" },
+  profiles: { bride: "assets/images/couple-01.jpeg", groom: "assets/images/couple-02.jpeg" },
   ayat: "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",   // Ar-Rum 30:21
 
   story: [ { photo: "assets/images/story-01.jpeg" }, { photo: "assets/images/story-02.jpeg" }, { photo: "assets/images/story-03.jpeg" } ],
@@ -21,7 +21,27 @@ window.WEDDING = {
   ],
   venueMap: { name: "Gedung Soos Sasono Suko Cepu", query: "Gedung Soos Sasono Suko Cepu" },
 
-  gallery: [ { src: "assets/images/couple-01.jpeg" }, { src: "assets/images/couple-02.jpeg" }, { src: "assets/images/hero.jpeg" }, { src: "assets/images/story-01.jpeg" } ],
+  // Gallery is shuffled for every guest. Photos alternate between the two prewedding concepts
+  // ("formal" = cream dress & navy suit, "casual" = beige knit & food), so every guest sees both mixed together.
+  // galleryAlts in i18n below must stay in the same order as this list.
+  galleryShuffle: true,
+  gallery: [
+    { src: "assets/images/gallery-01.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-02.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-03.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-04.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-05.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-06.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-07.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-08.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-09.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-10.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-11.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-12.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-13.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-14.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-15.jpeg", concept: "casual" }
+  ],
 
   gifts: {
     banks: [{ bank: "BNI", number: "0696305090", name: "Millenanda Chiara Adnyn" }],   // keep exactly as on the bank account
@@ -48,8 +68,8 @@ window.WEDDING = {
       seoTitle: "Chiara & Adji · Wedding Invitation",
       dateLabel: "Cepu · Saturday, 19 December 2026",
       verse: { ref: "Ar-Rum · Verse 21", text: "And among His signs is that He created for you spouses from among yourselves, that you may find tranquility in them, and He placed between you love and mercy. Indeed, in that are signs for a people who reflect." },
-      heroAlt: "The couple walking together through a tropical garden",
-      galleryAlts: ["The couple standing close together, dressed in batik", "The couple together", "The couple walking together through a tropical garden", "The couple standing side by side holding white flowers"],
+      heroAlt: "The couple holding a pizza box that reads Save the Date 19.12.26",
+      galleryAlts: ["The couple holding hands under a studio lamp, smiling at each other", "The couple making playful faces, Chiara giving a peace sign", "The couple seated under a studio lamp, laughing together (black and white)", "The couple sitting side by side under a studio lamp", "The couple hugging, Chiara lifting one foot (black and white)", "The couple holding hands and laughing under a studio lamp", "The couple hugging, Chiara lifting one foot", "The couple holding a pizza box that reads Save the Date 19.12.26", "Chiara and Adji laughing over a slice of pizza", "Chiara feeding Adji with chopsticks", "Adji feeding Chiara noodles", "The couple laughing while sharing noodles", "The couple biting the same slice of pizza", "The couple holding doughnuts and smiling", "The couple laughing together over pizza"],
       dressCode: "",
 
       texts: {
@@ -156,8 +176,8 @@ window.WEDDING = {
       seoTitle: "Chiara & Adji · Undangan Pernikahan",
       dateLabel: "Cepu · Sabtu, 19 Desember 2026",
       verse: { ref: "QS. Ar-Rum · Ayat 21", text: "Dan di antara tanda-tanda kebesaran-Nya, Dia menciptakan pasangan untukmu dari jenismu sendiri agar kamu merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir." },
-      heroAlt: "Sepasang mempelai berjalan bersama di taman tropis",
-      galleryAlts: ["Sepasang mempelai berdiri berdekatan dengan busana batik", "Sepasang mempelai bersama", "Sepasang mempelai berjalan bersama di taman tropis", "Sepasang mempelai berdiri berdampingan sambil memegang bunga putih"],
+      heroAlt: "Sepasang mempelai memegang kotak pizza bertuliskan Save the Date 19.12.26",
+      galleryAlts: ["Sepasang mempelai bergandengan tangan di bawah lampu studio, saling tersenyum", "Sepasang mempelai berpose lucu, Chiara mengacungkan dua jari", "Sepasang mempelai duduk di bawah lampu studio sambil tertawa (hitam putih)", "Sepasang mempelai duduk berdampingan di bawah lampu studio", "Sepasang mempelai berpelukan, Chiara mengangkat satu kaki (hitam putih)", "Sepasang mempelai bergandengan tangan sambil tertawa di bawah lampu studio", "Sepasang mempelai berpelukan, Chiara mengangkat satu kaki", "Sepasang mempelai memegang kotak pizza bertuliskan Save the Date 19.12.26", "Chiara dan Adji tertawa bersama sepotong pizza", "Chiara menyuapi Adji dengan sumpit", "Adji menyuapi Chiara mi", "Sepasang mempelai tertawa sambil berbagi mi", "Sepasang mempelai menggigit potongan pizza yang sama", "Sepasang mempelai memegang donat sambil tersenyum", "Sepasang mempelai tertawa bersama di depan pizza"],
       dressCode: "",
 
       texts: {

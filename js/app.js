@@ -14,6 +14,18 @@
   };
   let lang = pickLang(), D = W.i18n[lang], T = D.texts, U = D.ui;
 
+  /* ---------- Gallery order: different for every guest ---------- */
+  // Shuffle each prewedding concept separately, then alternate them so both concepts are always mixed.
+  // The same new order is applied to every language's galleryAlts so captions stay matched.
+  if (W.galleryShuffle && W.gallery.length > 1) {
+    const mix = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const groups = {}; W.gallery.forEach((p, i) => (groups[p.concept || "all"] ||= []).push(i));
+    const lists = mix(Object.values(groups).map(mix)), order = [];
+    while (lists.some(l => l.length)) lists.forEach(l => l.length && order.push(l.shift()));
+    W.gallery = order.map(i => W.gallery[i]);
+    Object.values(W.i18n).forEach(L => { if (Array.isArray(L.galleryAlts)) { const o = L.galleryAlts; L.galleryAlts = order.map(i => o[i]); } });
+  }
+
   /* ---------- Helpers ---------- */
   // Safe DOM builder: text always goes through textContent (no HTML injection)
   function h(tag, attrs = {}, ...kids) {
