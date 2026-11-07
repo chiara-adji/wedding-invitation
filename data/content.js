@@ -10,7 +10,7 @@ window.WEDDING = {
   date: "2026-12-19T08:00:00+07:00",      // countdown target: Akad Nikah 08:00 WIB
   hero: { photo: "assets/images/hero.jpeg" },
   // Bride & groom portraits on "The Wedding of" page (shown inside the oval frame)
-  profiles: { bride: "assets/images/couple-01.jpeg", groom: "assets/images/couple-02.jpeg" },
+  profiles: { bride: "assets/images/profile-01.jpeg", groom: "assets/images/profile-02.jpeg" },
   ayat: "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",   // Ar-Rum 30:21
 
   story: [ { photo: "assets/images/story-01.jpeg" }, { photo: "assets/images/story-02.jpeg" }, { photo: "assets/images/story-03.jpeg" } ],
@@ -21,26 +21,30 @@ window.WEDDING = {
   ],
   venueMap: { name: "Gedung Soos Sasono Suko Cepu", query: "Gedung Soos Sasono Suko Cepu" },
 
-  // Gallery is shuffled for every guest. Photos alternate between the two prewedding concepts
+  // Gallery ("Moments" slides and the Counting-the-days slideshow) is shuffled for every guest. Couple photos only (no solo profile photos).
+  // Photos alternate between the two prewedding concepts
   // ("formal" = cream dress & navy suit, "casual" = beige knit & food), so every guest sees both mixed together.
   // galleryAlts in i18n below must stay in the same order as this list.
   galleryShuffle: true,
   gallery: [
     { src: "assets/images/gallery-01.jpeg", concept: "formal" },
-    { src: "assets/images/gallery-02.jpeg", concept: "formal" },
     { src: "assets/images/gallery-03.jpeg", concept: "formal" },
-    { src: "assets/images/gallery-04.jpeg", concept: "formal" },
-    { src: "assets/images/gallery-05.jpeg", concept: "formal" },
-    { src: "assets/images/gallery-06.jpeg", concept: "formal" },
-    { src: "assets/images/gallery-07.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-04.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-05.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-06.jpeg", concept: "casual" },
+    { src: "assets/images/gallery-07.jpeg", concept: "casual" },
     { src: "assets/images/gallery-08.jpeg", concept: "casual" },
     { src: "assets/images/gallery-09.jpeg", concept: "casual" },
     { src: "assets/images/gallery-10.jpeg", concept: "casual" },
     { src: "assets/images/gallery-11.jpeg", concept: "casual" },
     { src: "assets/images/gallery-12.jpeg", concept: "casual" },
-    { src: "assets/images/gallery-13.jpeg", concept: "casual" },
-    { src: "assets/images/gallery-14.jpeg", concept: "casual" },
-    { src: "assets/images/gallery-15.jpeg", concept: "casual" }
+    { src: "assets/images/gallery-13.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-14.jpeg", concept: "formal" },
+    { src: "assets/images/gallery-15.jpeg", concept: "formal" },
+    { src: "assets/images/hero.jpeg", concept: "formal" },
+    { src: "assets/images/story-01.jpeg", concept: "formal" },
+    { src: "assets/images/story-02.jpeg", concept: "formal" },
+    { src: "assets/images/story-03.jpeg", concept: "formal" }
   ],
 
   gifts: {
@@ -48,7 +52,7 @@ window.WEDDING = {
     ewallets: [],
     qr: null
   },
-  registry: [ { url: "" } ],              // paste the Google Sheets link in url
+  registry: [ { url: "" } ],              // wishlist link (e.g. Google Sheets); shown inside the Wedding Gift drop-down
 
   // Songs play in a random order for every guest. Put the files in assets/music/
   music: {
@@ -68,8 +72,8 @@ window.WEDDING = {
       seoTitle: "Chiara & Adji · Wedding Invitation",
       dateLabel: "Cepu · Saturday, 19 December 2026",
       verse: { ref: "Ar-Rum · Verse 21", text: "And among His signs is that He created for you spouses from among yourselves, that you may find tranquility in them, and He placed between you love and mercy. Indeed, in that are signs for a people who reflect." },
-      heroAlt: "The couple holding a pizza box that reads Save the Date 19.12.26",
-      galleryAlts: ["The couple holding hands under a studio lamp, smiling at each other", "The couple making playful faces, Chiara giving a peace sign", "The couple seated under a studio lamp, laughing together (black and white)", "The couple sitting side by side under a studio lamp", "The couple hugging, Chiara lifting one foot (black and white)", "The couple holding hands and laughing under a studio lamp", "The couple hugging, Chiara lifting one foot", "The couple holding a pizza box that reads Save the Date 19.12.26", "Chiara and Adji laughing over a slice of pizza", "Chiara feeding Adji with chopsticks", "Adji feeding Chiara noodles", "The couple laughing while sharing noodles", "The couple biting the same slice of pizza", "The couple holding doughnuts and smiling", "The couple laughing together over pizza"],
+      heroAlt: "Chiara and Adji hugging and laughing under a studio lamp (black and white)",
+      galleryAlts: ["The couple holding hands under a studio lamp, smiling at each other", "The couple making playful faces, Chiara giving a peace sign", "The couple holding a pizza box that reads Save the Date 19.12.26", "Chiara and Adji laughing over a slice of pizza", "Chiara feeding Adji with chopsticks", "Adji feeding Chiara noodles", "The couple laughing while sharing noodles", "The couple sharing pizza at the table, smiling at each other", "The couple biting the same slice of pizza", "The couple holding doughnuts and smiling", "The couple laughing together over pizza", "The couple seated under a studio lamp, laughing together (black and white)", "Chiara hugging Adji, her veil flowing", "The couple sitting side by side under a studio lamp", "Chiara and Adji hugging and laughing under a studio lamp (black and white)", "The couple holding hands and laughing under a studio lamp", "Chiara seated, Adji standing beside her holding her hand", "Chiara hugging Adji, her veil flowing"],
       dressCode: "",
 
       texts: {
@@ -78,7 +82,12 @@ window.WEDDING = {
         invite: "Together with our families, we invite you to celebrate our wedding",
         weddingOf: "The Wedding of",
         songsTitle: "Our songs",
-        countdownTitle: "Counting the days",
+        countdownTitle: "Counting the days", countdownEyebrow: "Until we say I do", countdownPaper: "Saturday · Cepu",
+        storyEyebrow: "A little book about us",
+        book: { of: "The story of", tap: "Tap to open the book", chapter: "Chapter", epilogue: "Epilogue", next: "Next page", back: "Back", close: "Close", open: "Open our love story",
+          ending: "to be continued, forever",
+          epi: { lines: ["In a world full of noise,", "you became the quietest,"], accent: "softest answer", end: "to my prayers." } },
+        galleryEyebrow: "Little pieces of us", swipe: "swipe",
         storyTitle: "Our love story",
         eventsTitle: "The day",
         galleryTitle: "Moments",
@@ -86,15 +95,16 @@ window.WEDDING = {
         rsvpTitle: "Will You Join Us?",
         giftTitle: "Warmest Wishes",
         giftIntro: "Your blessings and warm wishes are truly more than enough. For those who have kindly asked and wish to share an additional blessing, you may do so through the details below.",
-        registryTitle: "Registry", registryIntro: "",
+        giftOpen: "View details", giftClose: "Close",
         wishesTitle: "Wishes",
-        closing: "We have found our quiet certainty in each other. Thank you for walking alongside our story, and we truly look forward to celebrating the beginning of our forever with you."
+        closing: "We have found our quiet certainty in each other. Thank you for walking alongside our story, and we truly look forward to celebrating the beginning of our forever with you.",
+        madeBy: "This invitation was lovingly designed and made by the bride and groom themselves, Chiara & Adji."
       },
 
       ui: {
         units: ["Days", "Hours", "Min", "Sec"], timer: "Time remaining",
         viewMap: "View on map", mapTitle: "Map to ", dress: "Dress code",
-        openPhoto: "Open photo: ", noPhotos: "Photos are still loading",
+        openPhoto: "Open photo: ", prevPhoto: "Previous photo", nextPhoto: "Next photo", noPhotos: "Photos are still loading",
         songsHint: "Tap any song to play it",
         openMap: "Open in Maps", guideOpen: "Traveling from out of town? Tap to open our Cepu guide", guideClose: "Close the guide", dep: "Departs", arr: "Arrives", musicLoading: "Loading music… tap ♪ if it stays silent",
         play: "Play music", pause: "Pause music", prev: "Previous song", next: "Next song",
@@ -167,8 +177,13 @@ window.WEDDING = {
         ],
         returnNote: "Return trips: Several comfortable afternoon and evening trains to both Semarang and Surabaya depart after 15:00 WIB."
       },
-      gifts: { addressLabel: "Gift address", addressText: "Balikpapan [full address to be added]" },
-      registry: [ { name: "Our wishlist", note: "" } ]
+      gifts: {
+        moneyTitle: "Digital Envelope", moneyNote: "Tap to copy the account number.",
+        sendTitle: "Send a Gift", sendNote: "Gifts can be delivered to our home in Balikpapan.",
+        addressLabel: "Delivery address", addressText: "Balikpapan [full address to be added]",
+        wishTitle: "Our Wishlist", wishNote: "A few things for our new home, in case you would like some inspiration."
+      },
+      registry: [ { name: "Chiara & Adji’s wishlist", note: "" } ]
     },
 
     /* ======================= BAHASA INDONESIA ======================= */
@@ -176,8 +191,8 @@ window.WEDDING = {
       seoTitle: "Chiara & Adji · Undangan Pernikahan",
       dateLabel: "Cepu · Sabtu, 19 Desember 2026",
       verse: { ref: "QS. Ar-Rum · Ayat 21", text: "Dan di antara tanda-tanda kebesaran-Nya, Dia menciptakan pasangan untukmu dari jenismu sendiri agar kamu merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir." },
-      heroAlt: "Sepasang mempelai memegang kotak pizza bertuliskan Save the Date 19.12.26",
-      galleryAlts: ["Sepasang mempelai bergandengan tangan di bawah lampu studio, saling tersenyum", "Sepasang mempelai berpose lucu, Chiara mengacungkan dua jari", "Sepasang mempelai duduk di bawah lampu studio sambil tertawa (hitam putih)", "Sepasang mempelai duduk berdampingan di bawah lampu studio", "Sepasang mempelai berpelukan, Chiara mengangkat satu kaki (hitam putih)", "Sepasang mempelai bergandengan tangan sambil tertawa di bawah lampu studio", "Sepasang mempelai berpelukan, Chiara mengangkat satu kaki", "Sepasang mempelai memegang kotak pizza bertuliskan Save the Date 19.12.26", "Chiara dan Adji tertawa bersama sepotong pizza", "Chiara menyuapi Adji dengan sumpit", "Adji menyuapi Chiara mi", "Sepasang mempelai tertawa sambil berbagi mi", "Sepasang mempelai menggigit potongan pizza yang sama", "Sepasang mempelai memegang donat sambil tersenyum", "Sepasang mempelai tertawa bersama di depan pizza"],
+      heroAlt: "Chiara dan Adji berpelukan sambil tertawa di bawah lampu studio (hitam putih)",
+      galleryAlts: ["Sepasang mempelai bergandengan tangan di bawah lampu studio, saling tersenyum", "Sepasang mempelai berpose lucu, Chiara mengacungkan dua jari", "Sepasang mempelai memegang kotak pizza bertuliskan Save the Date 19.12.26", "Chiara dan Adji tertawa bersama sepotong pizza", "Chiara menyuapi Adji dengan sumpit", "Adji menyuapi Chiara mi", "Sepasang mempelai tertawa sambil berbagi mi", "Sepasang mempelai berbagi pizza di meja, saling tersenyum", "Sepasang mempelai menggigit potongan pizza yang sama", "Sepasang mempelai memegang donat sambil tersenyum", "Sepasang mempelai tertawa bersama di depan pizza", "Sepasang mempelai duduk di bawah lampu studio sambil tertawa (hitam putih)", "Chiara memeluk Adji dengan veil berkibar", "Sepasang mempelai duduk berdampingan di bawah lampu studio", "Chiara dan Adji berpelukan sambil tertawa di bawah lampu studio (hitam putih)", "Sepasang mempelai bergandengan tangan sambil tertawa di bawah lampu studio", "Chiara duduk, Adji berdiri di sampingnya menggenggam tangannya", "Chiara memeluk Adji dengan veil berkibar"],
       dressCode: "",
 
       texts: {
@@ -186,7 +201,12 @@ window.WEDDING = {
         invite: "Bersama keluarga, kami dengan penuh sukacita mengundang Anda untuk merayakan pernikahan kami",
         weddingOf: "Pernikahan",
         songsTitle: "Lagu Kami",
-        countdownTitle: "Menghitung hari",
+        countdownTitle: "Menghitung hari", countdownEyebrow: "Menuju hari bahagia", countdownPaper: "Sabtu · Cepu",
+        storyEyebrow: "Sebuah buku kecil tentang kami",
+        book: { of: "Kisah", tap: "Ketuk untuk membuka buku", chapter: "Bab", epilogue: "Epilog", next: "Berikutnya", back: "Kembali", close: "Tutup", open: "Buka kisah cinta kami",
+          ending: "bersambung, selamanya",
+          epi: { lines: ["Di tengah dunia yang penuh riuh,", "hadirmu adalah jawaban"], accent: "paling tenang", end: "atas doa-doaku." } },
+        galleryEyebrow: "Kepingan kecil tentang kami", swipe: "geser",
         storyTitle: "Kisah Cinta Kami",
         eventsTitle: "Hari Bahagia",
         galleryTitle: "Momen",
@@ -194,15 +214,16 @@ window.WEDDING = {
         rsvpTitle: "Berkenan Menjadi Bagian dari Hari Bahagia Kami?",
         giftTitle: "Ungkapan Kasih",
         giftIntro: "Doa restu dan ucapan hangat dari Anda sudah lebih dari cukup bagi kami. Bagi yang berkenan berbagi tanda kasih, dapat melalui keterangan berikut.",
-        registryTitle: "Daftar Hadiah", registryIntro: "",
+        giftOpen: "Lihat detail", giftClose: "Tutup",
         wishesTitle: "Ucapan & Doa",
-        closing: "Kami telah menemukan kepastian dan ketenangan di dalam diri satu sama lain. Terima kasih atas ketulusan doa dan dukungan yang senantiasa mengiringi langkah kami. Merupakan suatu kehormatan dan kebahagiaan bagi kami untuk menyambut hari istimewa ini bersama Bapak/Ibu/Saudara/i sekalian."
+        closing: "Kami telah menemukan kepastian dan ketenangan di dalam diri satu sama lain. Terima kasih atas ketulusan doa dan dukungan yang senantiasa mengiringi langkah kami. Merupakan suatu kehormatan dan kebahagiaan bagi kami untuk menyambut hari istimewa ini bersama Bapak/Ibu/Saudara/i sekalian.",
+        madeBy: "Undangan ini dirancang dan dibuat dengan sepenuh hati oleh kedua mempelai, Chiara & Adji."
       },
 
       ui: {
         units: ["Hari", "Jam", "Menit", "Detik"], timer: "Waktu tersisa",
         viewMap: "Lihat peta", mapTitle: "Peta menuju ", dress: "Kode busana",
-        openPhoto: "Buka foto: ", noPhotos: "Foto masih dimuat",
+        openPhoto: "Buka foto: ", prevPhoto: "Foto sebelumnya", nextPhoto: "Foto berikutnya", noPhotos: "Foto masih dimuat",
         songsHint: "Ketuk lagu untuk memutarnya",
         openMap: "Buka di Peta", guideOpen: "Datang dari luar kota? Ketuk untuk melihat panduan Cepu", guideClose: "Tutup panduan", dep: "Berangkat", arr: "Tiba", musicLoading: "Memuat musik… ketuk ♪ jika masih sunyi",
         play: "Putar musik", pause: "Jeda musik", prev: "Lagu sebelumnya", next: "Lagu berikutnya",
@@ -275,8 +296,13 @@ window.WEDDING = {
         ],
         returnNote: "Perjalanan pulang: Tersedia beragam pilihan jadwal kereta sore dan malam menuju Semarang maupun Surabaya yang berangkat setelah pukul 15.00 WIB."
       },
-      gifts: { addressLabel: "Alamat pengiriman hadiah", addressText: "Balikpapan [alamat lengkap akan ditambahkan]" },
-      registry: [ { name: "Wishlist kami", note: "" } ]
+      gifts: {
+        moneyTitle: "Amplop Digital", moneyNote: "Ketuk untuk menyalin nomor rekening.",
+        sendTitle: "Kirim Kado", sendNote: "Kado dapat dikirimkan ke kediaman kami di Balikpapan.",
+        addressLabel: "Alamat pengiriman", addressText: "Balikpapan [alamat lengkap akan ditambahkan]",
+        wishTitle: "Wishlist Kami", wishNote: "Beberapa kebutuhan rumah baru kami, bila Anda membutuhkan inspirasi."
+      },
+      registry: [ { name: "Wishlist Chiara & Adji", note: "" } ]
     }
   }
 };
