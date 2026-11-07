@@ -78,7 +78,13 @@
     en: { k: 'Before you open it', t: 'Play a little game first?', s: 'We made a tiny game about how we always find our way to each other.', p: '▶︎ Play the mini game', g: 'Go to the invitation', m: 'About 1 minute · sound on' }
   };
   var pass = false;
-  // the game choice shows every time the envelope is opened (it no longer hides after the game was played once)
+  // After playing the mini game, the choice is skipped for the rest of this visit (same tab).
+  // On a new visit later, the game choice shows again. Add ?game to the link to force it.
+  try {
+    localStorage.removeItem('ca-played');
+    if (/[?&]game\b/.test(location.search)) sessionStorage.removeItem('ca-played');
+    pass = sessionStorage.getItem('ca-played') === '1';
+  } catch (e) {}
   function lang() {
     var b = document.querySelector('#lang-open [aria-pressed="true"]');
     var v = b ? b.textContent.trim().toLowerCase() : (document.documentElement.lang || 'en');
