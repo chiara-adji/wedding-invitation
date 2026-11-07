@@ -816,3 +816,92 @@ body{font-synthesis:none}
 .gift .card .acct{font:500 28px/1.3 var(--f-disp);font-variant-numeric:lining-nums;letter-spacing:.08em;color:var(--forest)}
 .gift .card h3{font:italic 400 24px var(--f-book);color:var(--forest)}
 #couple-t{font:400 clamp(42px,12vw,54px)/1.15 var(--f-script);letter-spacing:0}
+
+/* ---------- Fix round: match the approved preview ---------- */
+/* The Wedding of: textured damask only, no lace side strips, no card behind the portraits */
+#couple{padding-inline:20px;background:linear-gradient(rgba(245,239,227,.62),rgba(245,239,227,.7)),url(../assets/art/tx-sage-damask.webp) center/520px auto,var(--ivory)}
+#couple::before,#couple::after,#couple .wrap::before{display:none}
+#couple .person{background:none!important;box-shadow:none!important;padding:0 6px;border:0}
+#couple .person::before,#couple .person::after{display:none}
+#couple .person .corner{display:none}
+#couple .people{gap:0;margin-top:18px}
+#couple .people .amp{margin:26px 0 24px}
+#couple .lace-pf{margin:0 auto 10px}
+#couple .pname{font:400 clamp(24px,6.6vw,28px)/1.25 var(--f-book);color:var(--forest)}
+
+/* Event cards: plain textured paper with a thin double rule */
+.ev.card{border:0;border-image:none;background:#F3EBDA url(../assets/art/paper-old.webp) center/cover;box-shadow:0 5px 14px rgba(0,0,0,.25);
+  width:min(330px,100%);margin-inline:auto;padding:34px 22px 30px;color:var(--ink)}
+.ev.card::before{display:block;content:"";position:absolute;inset:8px;border:1px solid rgba(86,96,63,.45);outline:1px solid rgba(86,96,63,.2);outline-offset:-5px;pointer-events:none}
+.ev.card::after{display:block}
+.ev.card:nth-of-type(odd){transform:rotate(-.8deg)}.ev.card:nth-of-type(even){transform:rotate(.8deg)}
+.ev.card h3{font:italic 400 30px/1.15 var(--f-book);color:var(--forest);margin-bottom:8px}
+.ev.card .meta{font:500 13.5px/1.6 var(--f-disp);letter-spacing:.14em;margin:2px 0}
+.ev.card p:not(.meta):not(.cap){font:400 17px var(--f-body);margin-top:14px}
+.ev.card .cap{margin-top:2px;font-size:15px}
+
+/* Gift cards: same width and type sizes as the preview */
+.gift .cards{display:grid;justify-items:center;gap:16px;margin-top:14px}
+.gift .card{width:min(340px,100%);margin:0 auto;padding:26px 20px 22px;transform:none}
+.gift .card::before{display:block;content:"";position:absolute;inset:7px;border:1px solid rgba(86,96,63,.4);pointer-events:none}
+.gift .card::after{display:none}
+.gift .card .meta{font:400 13px var(--f-booksc);letter-spacing:.3em;margin:0}
+.gift .card .acct{font:500 28px/1.3 var(--f-disp);letter-spacing:.08em;margin:4px 0 2px;word-break:normal}
+.gift .card .cap{font:italic 400 15px/1.5 var(--f-body);margin:2px 0 0}
+.gift .card .addr-t{margin:6px 0 2px}
+.gift .card h3{font:italic 400 24px/1.25 var(--f-book);margin:0}
+.gift .card .link{margin-top:12px;font:600 11.5px var(--f-disp);letter-spacing:.22em;padding:4px 0;border-bottom:1px solid var(--sage)}
+.gift .card .btn{margin-top:12px}
+.gift .gnote2{font-size:15.5px;margin-bottom:0}
+
+/* ---------- Closing: no divider; date sits below the flowers on the green ---------- */
+.closing{padding-bottom:70px}
+.closing>.dk.p-bl,.closing>.dk.p-br{bottom:52px}
+.closing .scene-c{margin-bottom:40px}
+.cl-date{position:absolute;left:0;right:0;bottom:24px;z-index:3;margin:0;text-align:center;font:400 12px/1.4 var(--f-booksc);letter-spacing:.24em;color:var(--mist)}
+
+/* ---------- City guide: train tickets ---------- */
+.tix{margin:16px auto 0;width:min(360px,100%)}
+.tix+.tix{margin-top:22px}
+.tix-t{position:relative;aspect-ratio:670/305;filter:drop-shadow(0 4px 8px rgba(60,45,20,.25))}
+.tix:nth-of-type(odd) .tix-t{transform:rotate(-1deg)}.tix:nth-of-type(even) .tix-t{transform:rotate(1deg)}
+.tix-bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tix-main{position:absolute;left:9%;right:33.5%;top:15%;bottom:14%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#3B2F1E}
+.tix-from{margin:0;font:400 clamp(9px,2.6vw,11px)/1.3 var(--f-booksc);letter-spacing:.14em;color:#5F4A2C}
+.tix-name{margin:2px 0 6px;font:italic 400 clamp(14px,4.1vw,17px)/1.15 var(--f-book);color:#2F2616;text-wrap:balance}
+.tix-tm{display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,2.4vw,12px)}
+.tix-tm small{display:block;font:600 clamp(7.5px,2vw,8.5px)/1.2 var(--f-disp);letter-spacing:.18em;text-transform:uppercase;color:#6E5A3A}
+.tix-tm b{display:block;font:500 clamp(17px,5vw,21px)/1.1 var(--f-disp);font-variant-numeric:lining-nums;color:#2F2616}
+.tix-arr{font-size:15px;color:#8A7550;padding-bottom:3px}
+.tix-wib{margin:2px 0 0;font:600 8px var(--f-disp);letter-spacing:.24em;color:#8A7550}
+.tix-stub{position:absolute;left:78%;right:5.2%;top:15%;bottom:14%;display:grid;place-items:center}
+.tix-stub span{writing-mode:vertical-rl;transform:rotate(180deg);font:400 clamp(11px,3.2vw,13px) var(--f-booksc);letter-spacing:.32em;color:#5F4A2C}
+.tix-note{margin:8px auto 0;max-width:320px;font:italic 400 14.5px/1.5 var(--f-book);color:var(--ink-soft);text-align:center}
+
+/* ---------- City guide places: smaller, airier text inside the cards ---------- */
+.gplace.card{width:min(330px,100%);margin-inline:auto;padding:30px 30px 20px}
+.gplace h3{font:italic 400 19px/1.25 var(--f-book);color:var(--forest);margin-bottom:8px}
+.gplace p{font:400 13.5px/1.65 var(--f-body);color:var(--ink-soft);max-width:240px;margin-inline:auto}
+.gplace .gextra{font:italic 400 13px/1.5 var(--f-book);color:var(--claret);margin-top:10px}
+.gplace .gmap{display:inline-block;margin-top:12px;font:600 10.5px var(--f-disp);letter-spacing:.22em}
+.gift .card .addr-t{max-width:260px;margin-inline:auto;font-size:14.5px;line-height:1.55}
+
+/* ---------- Wishlist (registry.js) in the invitation's storybook style ---------- */
+.gift .wish-open{margin-top:14px;min-height:44px;padding:0 22px;font:italic 400 16px var(--f-book);letter-spacing:.02em;text-transform:none;color:var(--forest);border-color:var(--sage);background:rgba(251,248,240,.6)}
+.rg-overlay{--rg-paper:#F3EBDA;--rg-forest:#56603F;--rg-maroon:#702B32;--rg-font-head:"IM Fell English",Georgia,serif}
+.rg-overlay .rg-sheet{background:#F3EBDA url(../assets/art/paper-old.webp) center/cover}
+.rg-overlay .rg-head{background:linear-gradient(rgba(70,80,50,.5),rgba(58,68,48,.62)),url(../assets/art/tx-moss.webp) center/cover,#56603F}
+.rg-overlay .rg-kicker{font:400 13px var(--f-booksc);letter-spacing:.24em;font-variant:normal}
+.rg-overlay .rg-title{font-size:40px}
+.rg-overlay .rg-intro{font:italic 400 15.5px/1.6 var(--f-book);max-width:380px}
+.rg-overlay .rg-how{font:italic 400 13.5px/1.5 var(--f-book);font-variant:normal;letter-spacing:.02em}
+.rg-overlay .rg-tab{font:400 13px var(--f-booksc);letter-spacing:.14em;font-variant:normal}
+.rg-overlay .rg-meta{font:italic 400 14px var(--f-book)}
+.rg-overlay .rg-item{max-width:360px;margin:24px auto 0;background:#FBF8F0 url(../assets/art/paper-old.webp) center/cover;box-shadow:0 4px 12px rgba(60,50,30,.18)}
+.rg-overlay .rg-frame{border-color:rgba(86,96,63,.4);padding:20px 16px 18px}
+.rg-overlay .rg-num{font:400 12px var(--f-booksc);letter-spacing:.24em;font-variant:normal}
+.rg-overlay .rg-name{font:italic 400 22px/1.2 var(--f-book);color:var(--forest)}
+.rg-overlay .rg-note{font:italic 400 14.5px var(--f-book)}
+.rg-overlay .rg-actions{gap:10px;margin-top:14px}
+.rg-overlay .rg-btn{max-width:260px;min-height:44px;font:600 11.5px var(--f-disp);letter-spacing:.2em}
+.rg-overlay .rg-link{font:600 11px var(--f-disp);letter-spacing:.22em;border-bottom-width:1px}

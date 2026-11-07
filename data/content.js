@@ -52,7 +52,7 @@ window.WEDDING = {
     ewallets: [],
     qr: null
   },
-  registry: [ { url: "" } ],              // wishlist link (e.g. Google Sheets); shown inside the Wedding Gift drop-down
+  registry: [ { url: "" } ],              // the wishlist itself lives in registry.js (Google Sheets CSV + WhatsApp); this only sets the card text below
 
   // Songs play in a random order for every guest. Put the files in assets/music/
   music: {
@@ -180,8 +180,8 @@ window.WEDDING = {
       gifts: {
         moneyTitle: "Digital Envelope", moneyNote: "Tap to copy the account number.",
         sendTitle: "Send a Gift", sendNote: "Gifts can be delivered to our home in Balikpapan.",
-        addressLabel: "Delivery address", addressText: "Balikpapan [full address to be added]",
-        wishTitle: "Our Wishlist", wishNote: "A few things for our new home, in case you would like some inspiration."
+        addressLabel: "Delivery address", addressText: "Grand City, Cluster Hayfield Blok VC7/50, Sepinggan Baru, Balikpapan Selatan, Kota Balikpapan, Kalimantan Timur",
+        wishTitle: "Our Wishlist", wishNote: "A little inspiration for our new beginning, for those who wish to give a token of love."
       },
       registry: [ { name: "Chiara & Adji’s wishlist", note: "" } ]
     },
@@ -299,8 +299,8 @@ window.WEDDING = {
       gifts: {
         moneyTitle: "Amplop Digital", moneyNote: "Ketuk untuk menyalin nomor rekening.",
         sendTitle: "Kirim Kado", sendNote: "Kado dapat dikirimkan ke kediaman kami di Balikpapan.",
-        addressLabel: "Alamat pengiriman", addressText: "Balikpapan [alamat lengkap akan ditambahkan]",
-        wishTitle: "Wishlist Kami", wishNote: "Beberapa kebutuhan rumah baru kami, bila Anda membutuhkan inspirasi."
+        addressLabel: "Alamat pengiriman", addressText: "Grand City, Cluster Hayfield Blok VC7/50, Sepinggan Baru, Balikpapan Selatan, Kota Balikpapan, Kalimantan Timur",
+        wishTitle: "Wishlist Kami", wishNote: "Referensi tanda kasih untuk melengkapi langkah baru kami, bagi Anda yang berkenan."
       },
       registry: [ { name: "Wishlist Chiara & Adji", note: "" } ]
     }

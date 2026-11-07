@@ -363,7 +363,9 @@
       h("p", { class: "cap addr-t", text: G.addressText }), h("button", { class: "link", type: "button", onclick: () => copy(G.addressText), text: U.copyAddr }))]));
     groups.push(grp(G.wishTitle, G.wishNote, W.registry.map((r, i) => { const t = D.registry[i] || {};
       return h("div", { class: "card" }, h("h3", { text: t.name }), t.note ? h("p", { class: "cap", text: t.note }) : null,
-        r.url ? h("a", { class: "btn ghost", href: r.url, target: "_blank", rel: "noopener noreferrer", text: U.wishBtn }) : h("p", { class: "cap", text: U.linkSoon })); })));
+        // opens the live wishlist from registry.js (status comes from the Google Sheet); falls back to a plain link if registry.js is missing
+        window.RegistryGift ? h("button", { type: "button", class: "btn ghost wish-open", "data-open-registry": "", text: U.wishBtn })
+          : r.url ? h("a", { class: "btn ghost", href: r.url, target: "_blank", rel: "noopener noreferrer", text: U.wishBtn }) : h("p", { class: "cap", text: U.linkSoon })); })));
     const tg = h("button", { type: "button", class: "btn ghost gtoggle", "aria-controls": "gift-body" });
     const body = h("div", { class: "gbody", id: "gift-body" }, h("div", { class: "gin" }, groups));
     const s = section("gift", "dark gift" + (giftOpen ? " open" : ""), ...head("", "", T.giftTitle),
@@ -378,9 +380,16 @@
     const C = D.guide, mapq = p => p.url || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(/cepu/i.test(p.name) ? p.name : p.name + " Cepu");
     const place = p => h("div", { class: "card gplace rv" }, h("h3", { text: p.name }), h("p", { text: p.text }),
       p.extra ? h("p", { class: "gextra", text: p.extra }) : null, h("a", { class: "link gmap", href: mapq(p), target: "_blank", rel: "noopener", text: U.openMap }));
-    const ticket = r => h("div", { class: "card ticket rv" }, h("p", { class: "meta", text: r.from }), h("h3", { text: r.train }),
-      h("div", { class: "tk" }, h("div", {}, h("small", { text: U.dep }), h("b", { text: r.dep })), h("span", { class: "arr", "aria-hidden": "true", text: "→" }),
-        h("div", {}, h("small", { text: U.arr }), h("b", { text: r.arr }))), r.note ? h("p", { class: "cap", text: r.note }) : null);
+    // Train tickets: vintage ticket artwork, details in the main part, destination on the stub, note underneath
+    const ticket = r => h("div", { class: "tix rv" },
+      h("div", { class: "tix-t" }, artImg("ticket", "tix-bg"),
+        h("div", { class: "tix-main" }, h("p", { class: "tix-from", text: r.from }), h("h3", { class: "tix-name", text: r.train }),
+          h("div", { class: "tix-tm" }, h("div", {}, h("small", { text: U.dep }), h("b", { text: r.dep.replace(/\s*WIB/i, "") })),
+            h("span", { class: "tix-arr", "aria-hidden": "true", text: "→" }),
+            h("div", {}, h("small", { text: U.arr }), h("b", { text: r.arr.replace(/\s*WIB/i, "") }))),
+          h("p", { class: "tix-wib", text: "WIB" })),
+        h("div", { class: "tix-stub", "aria-hidden": "true" }, h("span", { text: "Cepu" }))),
+      r.note ? h("p", { class: "tix-note", text: r.note }) : null);
     const grp = (title, ...kids) => h("div", { class: "ggroup" }, h("p", { class: "eyebrow", text: title }), ...kids);
     const ttl = h("div", { class: "gtitle rv" }, Art.stick("banner"), h("h2", { id: "guide-t", text: C.title }));
     const mk = cls => h("button", { type: "button", class: "btn ghost gtoggle " + cls, "aria-expanded": String(guideOpen), "aria-controls": "guide-body" });
@@ -413,10 +422,10 @@
     const fam = (label, p) => h("div", { class: "fam rv" }, h("p", { class: "eyebrow", text: label }),
       h("p", { class: "pn", text: p.parents[0] }), h("p", { class: "pn", text: "& " + p.parents[1] }), h("p", { class: "addr", text: p.address }));
     return h("section", { id: "closing", class: "sec dark closing", "aria-labelledby": "closing-t" }, h("div", { class: "wrap" },
-      rule(), h("div", { class: "cl-msg rv" }, Art.stick("lace-trim", "lt"), h("p", { id: "closing-t", class: "msg-c", text: T.closing }), Art.stick("lace-trim", "lt b")), quote(D.quotes.close),
+      h("div", { class: "cl-msg rv" }, Art.stick("lace-trim", "lt"), h("p", { id: "closing-t", class: "msg-c", text: T.closing }), Art.stick("lace-trim", "lt b")), quote(D.quotes.close),
       h("p", { class: "script joy rv", text: U.joy }),
       fam(U.brideLbl, D.bride), h("p", { class: "fam-sep rv", "aria-hidden": "true", text: "&" }), fam(U.groomLbl, D.groom),
-      art("scene-c rv", Art.px("elephant")), h("p", { class: "meta rv", text: D.dateLabel })));
+      art("scene-c rv", Art.px("elephant"))), h("p", { class: "cl-date", text: D.dateLabel }));
   }
 
   // Small credit line at the very end of the invitation
