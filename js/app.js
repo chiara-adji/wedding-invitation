@@ -302,7 +302,7 @@
     const f = $("#rsvp-form"); if (!f) return null;
     const at = f.querySelector("input[name=attendance]:checked");
     return { name: f.elements.namedItem("name").value, attendance: at ? at.value : "", guests: f.elements.namedItem("guests").value,
-      message: f.elements.namedItem("message").value, pub: f.elements.namedItem("public").checked };
+      message: f.elements.namedItem("message").value, pub: true };
   }
   function Rsvp(st) {
     const R = W.rsvp, num = h("input", { id: "r-n", name: "guests", value: "1", readonly: "", class: "num", "aria-label": U.guestsLbl });
@@ -318,11 +318,10 @@
       h("div", { class: "row" }, tick("radio", "attendance", "yes", U.yes), tick("radio", "attendance", "no", U.no)),
       count,
       h("div", { class: "row note" }, h("label", { for: "r-m", class: "script sm", text: U.words }), h("textarea", { id: "r-m", name: "message", maxlength: "400" })),
-      tick("checkbox", "public", "1", U.share),
       h("input", { class: "hp", name: "website", tabindex: "-1", autocomplete: "off", "aria-hidden": "true" }),
       h("button", { class: "btn", type: "submit", text: U.send }), h("p", { class: "msg", role: "status" }));
     if (st) { // keep what the guest already typed when the language changes
-      f.elements.namedItem("name").value = st.name; num.value = st.guests || "1"; f.elements.namedItem("message").value = st.message; f.elements.namedItem("public").checked = st.pub;
+      f.elements.namedItem("name").value = st.name; num.value = st.guests || "1"; f.elements.namedItem("message").value = st.message;
       const r = st.attendance && f.querySelector(`input[name=attendance][value=${st.attendance}]`); if (r) { r.checked = true; count.hidden = st.attendance === "no"; }
     }
     f.addEventListener("change", e => { if (e.target.name === "attendance") count.hidden = e.target.value === "no"; });
@@ -335,7 +334,7 @@
       if (!name || !fd.get("attendance")) { msg.textContent = U.errReq; msg.classList.add("err"); return; }
       const n = Math.min(W.rsvp.maxGuests, Math.max(1, parseInt(fd.get("guests"), 10) || 1));
       const payload = { name, attendance: fd.get("attendance"), guests: fd.get("attendance") === "yes" ? n : 0,
-        message: String(fd.get("message")).trim().slice(0, 400), public: !!fd.get("public"), invitedAs: guest };
+        message: String(fd.get("message")).trim().slice(0, 400), public: true, invitedAs: guest };
       if (!W.rsvp.endpoint) { msg.textContent = U.demo; return; }
       btn.disabled = true; msg.textContent = U.sending;
       try {
